@@ -1,0 +1,85 @@
+The following is a brief set of instructions for compiling and running the
+simulator.
+
+1.) Unpacking the source code:
+  1. Download a copy of the source tarball (m-sim_v2.0.tar.bz2).
+  2. In the directory containing the source tarball issue the following command:
+
+  $ tar -xjf m-sim_v2.0.tar.bz2
+
+  3. This will create a new directory named: m-sim_v2.0 containing all of the
+  simulator's source code and the benchmarks.
+
+2.) Compiling the source:
+  1. Change directories to the newly created m-sim_v2.0/ directory
+  2. Issue a make command such as:
+
+  $ make
+
+  NOTE: Be careful using multiple make jobs (by using -j argument to make). The
+  sysprobe binary that gets built as the first step is required by the rest of
+  the steps and this dependency is not captured in the Makefile.
+
+3.) Running the simulator:
+  1. To list all of the simulator's various command line options, which can be
+  used to configure the simulated processor such as adjusting the sizes or
+  configurations of various pipeline structures, issue the following command:
+
+  $ ./sim-outorder
+
+  For most of these a single line is printed showing the format of the command
+  line option, the default value (if you don't specify that option at all), and
+  a brief explanation of the pipeline structure being adjusted. For some of the
+  more complicated arguments such as cache configurations an additional
+  explanation is printed toward the end of the output.
+
+  2. To run a single threaded simulation fast-forwarding 1 million instructions
+  and simulating the next 1 million instructions, and using default values for
+  everything else issue something similar to the following command: (This
+  example runs the bzip2 benchmark)
+
+  $ ./sim-outorder -fastfwd 1000000 -max:inst 1000000 bzip2.arg
+
+  3. To run a SMT workload (consisting of bzip2 and gcc in this example) issue a
+  command similar to the following: (This uses the same fast-forwarding and max
+  instruction values as 1. )
+
+  $ ./sim-outorder -fastfwd 1000000 -max:inst 1000000 bzip2.arg gcc.arg
+
+  4. A list of the available benchmarks (from the SPEC2000 benchmark suite) is
+  as follows:
+    bzip2
+    equake
+    gcc
+    gzip
+    mcf
+    swim
+
+4.) Hacking the simulator:
+  1. Some relevant files:
+    sim-outorder.c: Probably the most important file, containing implementations
+    for pipeline stages, definitions of some key pipeline structures (such as
+    ROB, IQ, LSQ, etc.), and the main simulator loop
+
+    main.c: Contains the actual int main(int argc, char *argv[]) function as
+    well as some setup code and global variables.
+
+    cache.c & cache.h: Contains implementation of caches.
+
+  2. Tips:
+    1: The simulator contains a lot of code. You don't need to understand every
+    single piece of code to hack the simulator. Learn what you need to know to
+    get your project done and don't worry about the rest.
+
+    2: Use tools such as grep (or the search function in your text editor) to
+    help learn the code. If you see a function and your not sure what it does,
+    search for its definition and read through it, this is by far the best way
+    to learn what is going on. There are a good number of comments throughout
+    the code that should help you.
+
+    3: Get started early. Running simulations and making sense of the results
+    can take time, so plan on finishing up the actual coding at LEAST a few days
+    before the project is due. That way you leave yourself enough time to run
+    all your simulations and get the results into some format that is easier to
+    work with (such as a spreadsheet) so that you can make sense of them and
+    write about what you have found.

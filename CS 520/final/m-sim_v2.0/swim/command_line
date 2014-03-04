@@ -1,0 +1,1 @@
+swim < swim.ref.in > swim.out 2> swim.err

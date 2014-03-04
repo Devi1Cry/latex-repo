@@ -1,0 +1,101 @@
+\documentclass[10pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Homework 3}
+\duedate{February 27, 2014}
+
+\begin{document}
+Prove the following statements:
+
+\begin{problem}[1]
+ Let $X$ be a real inner product space with the inner product $\pa{\cdot,\cdot}$ and induced norm $\norm{\cdot}$.
+ \end{problem}
+
+\begin{problem}[1(a)]
+ For all $x,y,z \in X$, $\norm{z-x}^2 + \norm{z-y}^2 = \frac{1}{2}\norm{x-y}^2 + 2\norm{z - \frac{1}{2}(x+y)}^2$
+\end{problem}
+
+\begin{solution}
+ This looks something like the law of cosines, and I think we can use this, since $x,y$, and $z$ describe a ``triangle''.
+\end{solution}
+
+
+\begin{problem}{1(b)}
+   The condition $\norm{x} = \norm{y}$ implies $\pa{x+y,x-y} = 0$.  What is the geometric interpretation if $X = \R^2$.
+\end{problem}
+
+\begin{solution}
+ In $\R^2$, this implies that $x$ and $y$ are vectors with the same length and thus describe two sides of a rhombus.
+\end{solution}
+
+
+\begin{problem}[2]
+ Let $X$ be an inner product space and suppose that $\set{x_n}$ and $\set{y_n}$ are convergent sequences in $X$, with $\lim_{n\to\infty} x_n = x$, $\lim_{n\to\infty} y_n = y$.  Then \[\lim_{n\to\infty}(x_n,y_n) = (x,y).\]
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  The inner product is bilinear and thus continuous in both arguments.  We can thus write \[\lim_{n\to\infty}(x_n,y_n) = (\lim_{n\to\infty} x_n, \lim_{n\to\infty} y_n) = (x,y)\].
+ \end{proof}
+\end{solution}
+
+\begin{problem}[3]
+ If $Y$ is a closed linear subspace of a Hilbert space $H$ then $Y^{\perp\perp} = Y$.
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  In general, we know first that $Y \subset Y^{\perp\perp}$. We need to show $Y^{\perp\perp} \subset Y$.
+ \end{proof}
+\end{solution}
+
+
+\begin{problem}[4]
+ Let $X$ and $Y$ be linear subspaces of a Hilbert space $H$.  Define $X+Y = \set{x + y \in H : x \in X, y \in Y}$. Then $\pa{X + Y}^\perp = X^\perp \cap Y^\perp$.
+\end{problem}
+
+\begin{problem}[5]
+ Let $H$ be a Hilbert space and let $\set{e_n}$ be an orthonormal basis in $H$. Prove that the Parseval relation \[(x,y) = \Sum{(x,e_n)(e_n,y)}{n,1,\infty}\] holds for all $x,y \in H$.
+\end{problem}
+
+\begin{solution}
+\begin{proof}
+  Since $\set{e_n}$ is an orthonormal basis, we can write
+ \[x = \Sum{x_ne_n}{n,1,\infty}\qquad\text{and}\qquad y = \Sum{y_me_m}{m,1,\infty}\]
+ for all $x,y \in H$.  Then, we have
+ \begin{align*}
+  (x,y) &= \Sum{\Sum{x_ny_m (e_n,e_m)}{m,1,\infty}}{n,1,\infty} \\
+  {}&= \Sum{x_ny_n}{n,1,\infty} \\
+  {}&= \Sum{(x,e_n)(e_n,y)}{n,1,\infty}
+ \end{align*}
+\end{proof}
+\end{solution}
+
+
+\begin{problem}[6]
+ Let $H$ be a Hilbert space and let $\set{e_n}$ be an orthonormal sequence in $H$.  The following conditions are equivalent:
+ \begin{enumerate}[label=(\alph*)]
+  \item $\set{e_n : n \in \N}^\perp = \set{0}$;
+  \item $\overline{\Span}\set{e_n : n \in \N} = H$;
+  \item $\norm{x}^2 = \Sum{\Abs{(x,e_n)}^2}{n,1,\infty}$ for all $x \in H$;
+  \item $x = \Sum{(x,e_n)e_n}{n,1,\infty}$ for all $x \in H$.
+  
+  Hint: It suffices to prove (b)$\implies$(a) and (c)$\implies$(a).
+ \end{enumerate}
+
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  Since the closure of the space of ${e_n}$ is the whole space that (b)$\implies$(a) follows from the fact that $\set{0}^\perp = H$.
+ \end{proof}
+
+\end{solution}
+
+
+\end{document}

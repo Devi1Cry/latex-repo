@@ -1,0 +1,102 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Homework 1}
+\duedate{February 13, 2013}
+
+\begin{document}
+Prove the following:
+
+\begin{problem}[1]
+ Let $\nu$ be a signed measure on $(X,\mathcal{M})$. If $\set{E_j}$ is an increasing sequence in $\mathcal{M}$, then $\nu\pa{\bigcup^\infty_{j=1} E_j} = \lim_{j\to\infty} \nu(E_j)$.  If $\set{E_j}$ is a decreasing sequence in $\mathcal{M}$ and $\nu(E_1)$ is finite, then  $\nu\pa{\bigcap^\infty_{j=1} E_j} = \lim_{j\to\infty} \nu(E_j)$. 
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  We can create a sequence of disjoint sets $\set{\tilde{E_j}}$ (defined as $\tilde{E_1} = E_1$, $\tilde{E_k} = E_k \setminus \pa{E_1 \cup \dotsb \cup E_{k-1}}$. By countable additivity, then, we have $\nu\pa{\bigcup^\infty_{j=1} E_j} = \nu\pa{\bigcup^\infty_{j=1} \tilde{E_j}} = \sum^\infty_{j=0} \nu(\tilde{E_j})$. Since a particular $\nu(E_k) = \sum^k_{j=0} \nu(\tilde{E_j})$, we have $\sum^\infty_{j=0} \nu(\tilde{E_j}) = lim_{k\to\infty} \nu(E_k)$, which demonstrates the first proposition.
+  
+  For the second part, since we have $\nu(E_1)$ finite and $\set{E_j}$ decreasing, we construct our $\set{\tilde{E_j}}$ as $\set{\tilde{E_i} = E_1 \setminus E_i}$ which is an increasing set and $\nu(\tilde{E_i}) = \nu(E_1) - \nu(E_i)$.  From our last result, we have 
+  \begin{equation}
+   \nu\pa{\bigcup^\infty_{i=1} \tilde{E_i}} = \nu(E_1) - \lim_{i\to\infty} \nu(E_i).
+   \label{eq:1-1}
+  \end{equation}
+Also, by definition, $\bigcup^\infty_{i=1} \tilde{E_i} = E_1 \setminus \bigcap^\infty_{i=1} E_i$, so we also know 
+\begin{equation}
+ \nu\pa{\bigcup^\infty_{i=1} \tilde{E_i}} = \nu(E_1) - \nu(\bigcap^\infty_{i=1} E_i). 
+ \label{eq:1-2}
+\end{equation}
+Setting \ref{eq:1-1} and \ref{eq:1-2} equal yields the second result.
+ \end{proof}
+
+\end{solution}
+
+
+\begin{problem}[2]
+ Let $\nu$ be a signed measure.  Then $E$ is $\nu$-null iff $\abs{\nu}\!(E) = 0$.
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  First, we assume $\abs{\nu}\!(E) = 0$.  Then, we must have $\nu^+(E) = \nu^-(E) = 0$, so $\nu(E) = \nu^+(E) - \nu^-(E) = 0$.  Thus, $E$ is $\nu$-null.
+  
+  Next, we assume E is $\nu$-null. Since a subset of a null set is also null, we have positive and negative subsets $P$ and $N$ of $E$ such that $\nu^+(P)$ and $\nu^-(N)$ are null.  Thus, $E$ is $\nu^+$-null and $\nu^-$-null, so we have $\Abs{\nu}(E) = 0$.
+ \end{proof}
+\end{solution}
+
+
+\begin{problem}[3]
+ Let $\mu$ and $\nu$ be two signed measures.  Then $\nu \perp \mu$ iff $\abs{\nu} \perp \mu$ iff $\nu^+ \perp \mu$ and $\nu^- \perp \mu$.
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  We begin by assuming $\nu \perp \mu$.  Then we have a $\nu$-null set $E$ and a $\mu$-null set $F$ such that $E \cup F$ is the entire measure space.  From the previous result, we then have $E$ is also $\Abs{\nu}$-null, so $\Abs{\nu} \perp \mu$.  Then, since $\Abs{\nu} = \nu^+ + \nu^-$, we must also have $E$ $\nu^+$-null and $\nu^-$-null, so $\nu^+ \perp \mu$ and $\nu^- \perp \mu$.  The other direction follows from the previous result as well.
+ \end{proof}
+\end{solution}
+
+
+\begin{problem}[4]
+ Let $\mu$ be a measure and $\nu$ be a signed measure. Then. $\nu \ll \mu$ iff $\abs{\nu} \ll \mu$ iff $\nu^+ \ll \mu$ and $\nu^- \ll \mu$
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  Assume $\nu \ll \mu$. Then we have $\nu(E) = 0$ for every $\mu$-null set E.  Since E is both $\mu$-null and $\nu$-null, this implies it is also $\Abs{\nu}$-null, thus $\Abs{\nu}(E) = 0$ for every $\mu$-null set as well and $\Abs{\nu} \ll \mu$.  The rest then also follows from Remark 5.1.14 and 5.1.15.
+ \end{proof}
+\end{solution}
+
+
+
+\begin{problem}[5]
+ Let $\mu$ and $\lambda$ be two $\sigma$-finite measures. If $\mu \ll \lambda$ and $\lambda \ll \mu$ then $\D{\lambda}{\mu}\D{\mu}{\lambda} = 1$ a.e.\@ (w.r.t.\@ either $\lambda$ or $\mu$).
+ 
+ Hint: Use the Radon-Nikodym theorem.
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  Since $\mu \ll \lambda$ and $\lambda \ll \mu$, we have, by the Radon-Nikodym Theorem $d\mu = f d\lambda$ and $d\lambda = g d\mu$, where $f = \D{\mu}{\lambda}$ and thus $g = \frac{1}{f}$ a.e.  Therefore, we have $fg = \D{\lambda}{\mu}\D{\mu}{\lambda}  = 1$ a.e.
+  \end{proof}
+
+\end{solution}
+
+
+\begin{problem}[6]
+Let $\pa{X,\mathcal{M},\mu}$ be a $\sigma$-finite measure space, $\mathcal{N}$ a sub-$\sigma$-algebra of $\mathcal{M}$, and $\nu = \mu|\mathcal{N}$.  If $f \in L^1(\mu)$, there exists $g \in L^1(\nu)$ such that $\Int{f}{\mu,E} = \Int{g}{\nu,E}$ for all $E \in \mathcal{N}$; if $g^\prime$ is another such function then $g=g^\prime$ $\nu$-a.\ e. In probability theory, $g$ is called the conditional expectation of $f$ on $\mathcal{N}$.
+
+Hint:  Apply the Radon-Nikodym theorem to the signed measure $d\lambda = fd\mu$ on $\pa{X,\mathcal{N}}$.
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  Let $f \in L^1$.  Then, we we have $\nu(E) = \Int{f}{\mu,E}$, $\forall E \in \mathcal{N}$ with $\nu \ll \mu$.  Thus, by the Radon-Nikodym Theorem, there exists some function called the Radon-Nikodym derivate of $\nu$ w.r.t. $\mu$, that we will call our $g$.
+ \end{proof}
+
+\end{solution}
+
+\end{document}

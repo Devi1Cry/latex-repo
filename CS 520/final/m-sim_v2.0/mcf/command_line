@@ -1,0 +1,1 @@
+mcf mcf.in > mcf.out 2> mcf.err

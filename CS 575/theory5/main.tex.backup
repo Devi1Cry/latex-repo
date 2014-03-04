@@ -1,0 +1,121 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+\usepackage{breqn}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{CS 575}
+\assignment{Theory Assignment 5}
+\duedate{November 19, 2013}
+
+\begin{document}
+\begin{problem}[1]
+ For a given array, consider the following decision problem:  Is the 5000th largest element in the array greater than 100000?
+\end{problem}
+
+\begin{problem}[1a]
+ Does this problem belong to the class $\P$? Explain.
+\end{problem}
+
+\begin{solution}
+ We just need to access the 5000th element of the array, which takes either constant or $\BigO{n}$ time, and check if it is larger than 100000.
+\end{solution}
+
+\begin{problem}[1b]
+ Does it belong to the class $\NP$? Explain.
+\end{problem}
+
+\begin{solution}
+ Yes, because $\P \subset \NP$.
+\end{solution}
+
+\begin{problem}[1c]
+ Does it belong to the class $\NPC$ (the class of $\NP$-complete problems)? Explain.
+\end{problem}
+
+\begin{solution}
+Probably, but it is unclear whether $\P \subset \NPC$. 
+\end{solution}
+
+\begin{problem}[2]
+ Given an undirected graph $G=(V,E)$. The goal of the LPLENGTH optimization problem is to find the number of edges in the longest path connecting vertex $s\in V$ and vertex $t\in V$.
+\end{problem}
+
+\begin{problem}[2a]
+ Define the decision version PLENGTH associated with the optimization problem.
+\end{problem}
+
+\begin{solution}
+ The goal of the PLENGTH decision problem is to find whether this is a path of length greater than or equal to $n$ between vertices \(s\) and \(t\).
+\end{solution}
+
+\begin{problem}[2b]
+ Show that PLENGTH is in $\NP$.
+\end{problem}
+
+\begin{solution}
+ Given \(n\) and a set of edges in \(G\), the path and its length can be verified in linear time.
+\end{solution}
+
+\begin{problem}[2c]
+ Show that if the optimization problem LPLENGTH can be solved in polynomial time then PLENGTH is in $\P$.
+\end{problem}
+
+\begin{solution}
+ If LPLENGTH can be solved in polynomial time, then our algorithm for PLENGTH just runs the LPLENGTH algorithm and checks that the resulting path is longer than our bound.  Therefore, a polynomial time algorithm would exist for PLENGTH, so PLENGTH is in \(\P\).
+\end{solution}
+
+\begin{problem}[2d]
+ Show that the if LPLENGTH can be solved in polynomial time then the optimization problem can also be solved in polynomial time (Hint: The length of the longest path is 0 or 1 or 2 or $\dotsc$ or $\abs{V-1}$ edges). 
+\end{problem}
+
+\begin{solution}
+ 
+\end{solution}
+
+\begin{problem}[3]
+ A Hamiltonian path in a graph is a simple path that visits every vertex exactly once. Show that the language HAM-PATH $= \set{(G,u,v)|\text{ there is a Hamiltonian path from } u \text{ to } v \text{ in } G}$ belongs to $\NP$.
+\end{problem}
+
+\begin{solution}
+ Given a problem instance and a proposed path as the certificate, we could verify that the path is a Hamiltonian path in linear time by just checking that the path goes through every vertex only once.
+\end{solution}
+
+\begin{problem}[4]
+ A Boolean formula is a tautology if it evaluates to true for all possible assignment of its Boolean variables.  We do not know if tautology is in $\NP$.  Show that ``tautology bar'' belongs to $\NP$ and therefore tautology belongs to co-$\NP$. 
+\end{problem}
+
+\begin{solution}
+ Our certificate would just consist of an assignment of the Boolean variables and we would just need to verify that the formula evaluates to false, which should be done in constant time.  So ``tautology bar'' belongs to $\NP$.
+\end{solution}
+
+\begin{problem}[5]
+ Show a polynomial reduction from the sum of subsets problem to the 0/1 integer knapsack decision problem.
+\end{problem}
+
+\begin{solution}
+ The sum of subset problems says ``Given a list of integers $n_1,\dotsc,n_m$ and a total $t$, is there a subset of these integers that sums to $t$?''  The 0/1 knapsack problem states ``Given a list of weights $w_1,\dotsc,w_m$, a list of profits $p_1,\dotsc,p_m$, a weight $w$, and a profit $p$, is there a subset of the weights with total weight at most $w$ and profit at least $k$?''
+\end{solution}
+
+
+\begin{problem}[6]
+ The Two Partition Problem takes as input a set $N$ of numbers. The question is whether the numbers can be partitioned into two subsets $A$ and $A'=N-A$ such that the sum of the numbers in \(A\) is equal to the sum of the numbers in \(A'\). 
+\end{problem}
+
+\begin{problem}[6a]
+ Show that Two Partition is in $\NP$.
+\end{problem}
+
+\begin{problem}[6b]
+ Use the sum of subset problem to show that Two Partition is $\NP$ complete.
+\end{problem}
+
+
+
+
+
+
+
+\end{document}

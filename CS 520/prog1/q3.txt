@@ -1,0 +1,195 @@
+**OUT OF ORDER**
+static void
+readyq_enqueue(struct ROB_entry *rs)		/* RS to enqueue */
+{
+  struct RS_link *prev, *node, *new_node;
+
+  /* node is now queued */
+  if (rs->queued)
+    panic("node is already queued");
+  rs->queued = TRUE;
+
+
+  assert(all_operands_spec_ready(rs));
+
+
+  /* get a free ready list node */
+  RSLINK_NEW(new_node, rs);
+  new_node->x.seq = rs->seq;
+
+  /* otherwise insert in program order (earliest seq first) */
+  /* OLDEST FIRST ISSUE */
+  for (prev=NULL, node=ready_queue;
+     node && node->x.seq < rs->seq;
+     prev=node, node=node->next);
+
+  if (prev)
+    {
+      /* insert middle or end */
+      new_node->next = prev->next;
+      prev->next = new_node;
+    }
+  else
+    {
+      /* insert at beginning */
+      new_node->next = ready_queue;
+      ready_queue = new_node;
+    }
+}
+
+bzip: 1.0144
+equake: 1.9094
+gcc: 1.4399
+gzip: 1.0144
+mcf : 2.1908
+swim: 3.0173
+
+**POSITION-BASED SELECTION**
+static void
+readyq_enqueue(struct ROB_entry *rs)		/* RS to enqueue */
+{
+  struct RS_link *prev, *node, *new_node;
+
+  /* node is now queued */
+  if (rs->queued)
+    panic("node is already queued");
+  rs->queued = TRUE;
+
+
+  assert(all_operands_spec_ready(rs));
+
+
+  /* get a free ready list node */
+  RSLINK_NEW(new_node, rs);
+  new_node->x.seq = rs->seq;
+
+  /* otherwise insert in program order (earliest seq first) */
+  /* OLDEST FIRST ISSUE */
+  for (prev=NULL, node=ready_queue;
+     node && node->x.seq < rs->iq_entry_num;
+     prev=node, node=node->next);
+
+  if (prev)
+    {
+      /* insert middle or end */
+      new_node->next = prev->next;
+      prev->next = new_node;
+    }
+  else
+    {
+      /* insert at beginning */
+      new_node->next = ready_queue;
+      ready_queue = new_node;
+    }
+}
+
+bzip: 1.0291
+equake: 1.5693
+gcc: 1.3533
+gzip: 1.0291
+mcf: 2.1486
+swim: 2.7756
+
+**LONGER LATENCY FIRST**
+readyq_enqueue(struct ROB_entry *rs)		/* RS to enqueue */
+{
+  struct RS_link *prev, *node, *new_node;
+
+  /* node is now queued */
+  if (rs->queued)
+    panic("node is already queued");
+  rs->queued = TRUE;
+
+
+  assert(all_operands_spec_ready(rs));
+
+
+  /* get a free ready list node */
+  RSLINK_NEW(new_node, rs);
+  new_node->x.seq = rs->seq;
+  
+
+  /* otherwise insert in program order (earliest seq first) */
+  /* OLDEST FIRST ISSUE */
+  for (prev=NULL, node=ready_queue;
+     node && node->rs->exec_lat < rs->exec_lat;
+     prev=node, node=node->next);
+
+  if (prev)
+    {
+      /* insert middle or end */
+      new_node->next = prev->next;
+      prev->next = new_node;
+    }
+  else
+    {
+      /* insert at beginning */
+      new_node->next = ready_queue;
+      ready_queue = new_node;
+    }
+}
+
+bzip2: 1.0439
+equake: 1.5693
+gcc: 1.3594
+gzip: 1.0439
+mcf: 2.1486
+swim: 2.7532
+
+**LOADS-FIRST SELECTION**
+static void
+readyq_enqueue(struct ROB_entry *rs)		/* RS to enqueue */
+{
+  struct RS_link *prev, *node, *new_node;
+
+  /* node is now queued */
+  if (rs->queued)
+    panic("node is already queued");
+  rs->queued = TRUE;
+
+
+  assert(all_operands_spec_ready(rs));
+
+
+  /* get a free ready list node */
+  RSLINK_NEW(new_node, rs);
+  new_node->x.seq = rs->seq;
+  
+  if (/* load? */
+	  ((rs->op) & (F_MEM|F_LOAD)) == (F_MEM|F_LOAD))
+  {
+    /* insert at beginning */
+      new_node->next = ready_queue;
+      ready_queue = new_node;
+  }
+  /* otherwise insert in program order (earliest seq first) */
+  /* OLDEST FIRST ISSUE */
+  else
+  {
+  for (prev=NULL, node=ready_queue;
+     node && node->x.seq < rs->seq;
+     prev=node, node=node->next);
+
+  if (prev)
+    {
+      /* insert middle or end */
+      new_node->next = prev->next;
+      prev->next = new_node;
+    }
+  else
+    {
+      /* insert at beginning */
+      new_node->next = ready_queue;
+      ready_queue = new_node;
+    }
+  }
+}
+
+bzip2: 1.0144
+equake: 1.9030
+gcc: 1.4398
+gzip: 1.0144
+mcf: 2.1908
+swim: 3.0173
+
+

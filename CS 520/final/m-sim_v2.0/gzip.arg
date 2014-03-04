@@ -1,0 +1,1 @@
+0 # ./gzip/gzip00.peak.ev6 ./gzip/input.log 60 > ./gzip/input.log.out

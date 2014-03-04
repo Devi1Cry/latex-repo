@@ -1,0 +1,33 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Homework 1}
+\duedate{February 13, 2013}
+
+\begin{document}
+\begin{problem}[1]
+ Let $\nu$ be a signed measure on $(X,\mathcal{M})$. If $\set{E_j}$ is an increasing sequence in $\mathcal{M}$, then $\nu\pa{\bigcup^\infty_{j=1} E_j} = \lim_{j\to\infty} \nu(E_j)$.  If $\set{E_j}$ is a decreasing sequence in $\mathcal{M}$ and $\nu(E_1)$ is finite, then  $\nu\pa{\bigcap^\infty_{j=1} E_j} = \lim_{j\to\infty} \nu(E_j)$.
+\end{problem}
+
+\begin{problem}[2]
+ Let $\nu$ be a signed measure.  Then $E$ is $\nu$-null iff $\abs{\nu}\!(E) = 0$.
+\end{problem}
+
+\begin{problem}[3]
+ Let $\mu$ and $\nu$ be two signed measures.  Then $\nu \perp \mu$ iff $\abs{\nu} \perp \mu$ iff $\nu^+ \perp \mu$ and $\nu^- \perp \mu$.
+\end{problem}
+
+\begin{problem}[4]
+ Let $\mu$ be a measure and $\nu$ be a signed measure. Then. $\nu \ll \mu$ iff $\abs{nu} \ll \mu$ iff $\nu^+ \ll \mu$ and $\nu^- \ll \mu$
+\end{problem}
+
+\begin{problem}[5]
+ Let $\mu$ and $\lambda$ be two $\sigma$-finite measures. 
+\end{problem}
+
+\end{document}

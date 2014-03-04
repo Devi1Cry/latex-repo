@@ -1,0 +1,1 @@
+laste = head . reverse

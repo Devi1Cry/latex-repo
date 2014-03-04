@@ -1,0 +1,142 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{CS 571}
+\assignment{Assignment 3}
+\duedate{November 4, 2013}
+
+\begin{document}
+\begin{problem}[1]
+ Given a Haskell program
+ \begin{minted}{haskell}
+  let fun = x + 1 in fun 3
+ \end{minted}
+Please encode the program into an expression so that \code{let} is not used at all.
+\end{problem}
+
+\begin{solution}
+ \mint{haskell}|(\x->x+1)3|
+\end{solution}
+
+\begin{problem}[2]
+ Write a Haskell function \code{sublist lt} that computes all sublists of a list \code{lt}. The order of the elements in the sublist does not matter.
+\end{problem}
+
+\begin{solution}
+\inputminted{haskell}{code/sublists.hs}
+\end{solution}
+
+\begin{problem}[3]
+ Define a function \code{replic lt} that replicates each element in \code{lt} into a list. If the element is in the $k$th position of \code{lt}, the resulting list contains $k$ copies of the same element. You must define this function using the higher-order function of \code{map}.
+\end{problem}
+
+\begin{solution}
+ I don't see how to do this with just \code{map}.
+ \inputminted{haskell}{code/replic.hs}
+\end{solution}
+
+\begin{problem}[4]
+ In class, we introduced a function \code{reverse} to reverse the elements of a list, and function \code{head} as returning the first element of the list.  Define a function \code{laste} to return the last element of a non-empty list based on \code{reverse}, \code{head}, and possible function composition operator (.).
+\end{problem}
+
+\begin{solution}
+ \inputminted{haskell}{code/laste.hs}
+\end{solution}
+
+\begin{problem}[5]
+ Explain in English what the following function named \code{mystery} does.
+  \inputminted{haskell}{code/mystery.hs}
+\end{problem}
+
+\begin{solution}
+ The function is creating a range between n and m, counting up from n to m if n is smaller or counting down from m to n if n is larger.
+\end{solution}
+
+\begin{problem}[6]
+ Given the following definition of the propositional formula
+ \begin{minted}{haskell}
+  data Formula
+        = Atom Bool			-- atomic formula
+        | And Formula Formula		-- f /\ f
+        | Or Formula Formula		-- f \/ f
+        | Not Formula			-- not(f)
+ \end{minted}
+\end{problem}
+
+\begin{problem}{6.1}
+ Write a Haskell function \verb|collect_atoms f| that computes all atomic formulas of a propositional formula \code{f}
+\end{problem}
+
+\begin{problem}{6.2}
+ Write a Haskell function \code{eval f} to evaluate term f according to standard definitions of propositional logic.
+\end{problem}
+
+\begin{solution}
+ The full code for (1) and (2) follows.
+ \inputminted{haskell}{code/formula.hs}
+\end{solution}
+
+\begin{problem}[7]
+ Suppose we would like to have Featherweight Java directly support Java-style interfaces. (You only need to consider the simple case where interfaces are defined as a list of method signatures, and they can be ``implemented'' by classes and used as object types. No need to consider corner cases such as constants in interfaces, or anonymous class instantiation with interfaces.)
+\end{problem}
+
+\begin{problem}[7.1]
+ What changes should be made to the abstract syntax?
+\end{problem}
+
+\begin{solution}
+ We first need to add abstract syntax for an interface definition:
+ \verb|interface I {|$\mathtt{\bar{M}}$\verb|}|.
+ Then, we modify the class syntax to include \code{implements} and the list of methods from \code{I}:
+ 
+ \verb|class C extends D implements I{|$\mathtt{\bar{C}}$ $\mathtt{\bar{f}}$\verb|; K| $\mathtt{\bar{M}}$ $\mathtt{\bar{N}}$\verb|}|
+ 
+ Finally, we need to allow our method syntax to have no body, since this is what is added by the implementing class: \verb|C m(|$\mathtt{\bar{C}}$ $\mathtt{\bar{x}}$\verb|);|.
+\end{solution}
+
+\begin{problem}[7.2]
+ What changes should be made to the definition of a top-level Java program? (Recall it was previously defined as a list of classes together with a bootstrapping expression).
+\end{problem}
+
+\begin{solution}
+ The definition needs to be augmented with a list of interfaces implemented by the list of classes.
+\end{solution}
+
+
+\begin{problem}[7.3]
+ What changes should be made to operational semantics?
+\end{problem}
+
+\begin{solution}
+ No changes need to be made to operational semantics, since the lookups for method type and method body still work, since the methods from the interface are added to the method list for the class.
+\end{solution}
+
+
+\begin{problem}[7.4]
+ What changes should be made to expression typing rules?
+\end{problem}
+
+\begin{solution}
+ We add a predicate to rule \textsc{T-Invk} that requires either \code{C} extend \code{D} or \code{C} implements \code{D} when looking up return type for method \code{m}.
+\end{solution}
+
+
+\begin{problem}[7.5]
+ What changes should be made to method typing and class typing?
+\end{problem}
+
+\begin{solution}
+ If we add \verb|class C extends D implements I {...}|, then we have another predicate for method typing: if $mtype(\mathtt{m},\mathtt{I})$ etc.  For class-typing, we add a predicate to rule \textsc{T-Class} that requires $\mathtt{\bar{N}}$ \verb|OK IN C|, where $\mathtt{\bar{N}}$ is the list of methods from our interface as before.
+\end{solution}
+
+
+
+
+
+
+
+\end{document}

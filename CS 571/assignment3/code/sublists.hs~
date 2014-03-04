@@ -1,0 +1,2 @@
+sublists [] = [[]]
+sublists (x:xs) = [x:(sublists xs)] ++ sublists xs

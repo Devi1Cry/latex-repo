@@ -1,0 +1,154 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{algpseudocode}
+\usepackage{zach}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{CS 575}
+\assignment{Theory Assignment 3}
+\duedate{October 17, 2013}
+
+\begin{document}
+
+\problemlist{}
+
+\begin{problem}[1]
+Given an undirected graph $G$, modify the code of DFS to check if $G$ contains cycles.  If it does, print the first one discovered and return ``yes'', otherwise return ``no''.
+\end{problem}
+
+\begin{solution}
+Our original pseudocode for depth-first search consists of two functions:
+\begin{algorithmic}
+\Function{DFS}{G, color, d, f, parent}
+\ForAll{vertex u}
+	\State color[u]=white
+	\State parent[u]=-1
+	\State time=0
+\EndFor
+\ForAll{vertex u}
+\If{color[u]==white}
+\State DFS-Visit(u)
+\EndIf
+\EndFor
+\EndFunction
+\end{algorithmic}
+and
+
+\begin{algorithmic}
+\Function{DFS-Visit}{u}
+\State color[u]=gray
+\State time=time+1
+\State d[u]=time
+\ForAll{v $\in$ adj[u]}
+\If{color[v]==white}
+\State parent[v]=u
+\State DFS-Visit(v)
+\EndIf
+\EndFor
+\State color[u]=black
+\State time=time+1
+\State f[u]=time
+\EndFunction
+\end{algorithmic}
+
+We modify the \code{DFS-Visit} function to check if any each $v$ adjacent to vertex $u$ have been marked gray, which means this is the second time we are visiting it while checking the same node, so a cycle exists.  Otherwise, we recurse as normal.
+So, we now have:
+\begin{algorithmic}
+\Function{HasCycle?}{G, color, d, f, parent}
+\ForAll{vertex u}
+	\State color[u]=white
+	\State parent[u]=-1
+	\State time=0
+\EndFor
+\ForAll{vertex u}
+\If{color[u]==white}
+\If{DFS-Visit(u)}
+\State print cycle
+\State \Return ``yes''
+\EndIf
+\EndIf
+\EndFor
+\State \Return ``no''
+\EndFunction
+\end{algorithmic}
+and
+
+\begin{algorithmic}
+\Function{DFS-Visit}{u}
+\State color[u]=gray
+\State time=time+1
+\State d[u]=time
+\ForAll{v $\in$ adj[u]}
+\If{color[v]==gray}
+\State \Return true
+\ElsIf{color[v]==white}
+\State parent[v]=u
+\If{DFS-Visit(v)}
+\State \Return true
+\EndIf
+\EndIf
+\EndFor
+\State color[u]=black
+\State time=time+1
+\State f[u]=time
+\State \Return false
+\EndFunction
+\end{algorithmic}
+\end{solution}
+
+\begin{problem}[2]
+For each node $u$ in an undirected graph, let \verb|sDegree(u)| be the sum of the degrees of the neighbors of $u$.  Give pseudocode for an $\BigO{E+V}$ algorithm that outputs for each node $u$ its \code{sDegree}.
+\end{problem}
+
+\begin{solution}
+\begin{algorithmic}
+\Function{sDegree}{u}
+\State sDegree=0
+\ForAll{v $\in$ adj[u]}
+\ForAll{t $\in$ adj[v], s.t. t$\neq$u}
+\State sDegree=sDegree+1
+\EndFor
+\EndFor
+\EndFunction
+\end{algorithmic}
+\end{solution}
+
+\begin{problem}[3]
+The reverse of a directed graph $G=(V,E)$ is another directed graph $G^R=(V,E^R)$ on the same vertex set, but with all edges reversed.  So $E^R = \set{(v,u)|(u,v) \in E}$.  Give an $\BigO{E+V}$ algorithm for computing the reverse of a graph in adjacency list format.
+\end{problem}
+
+\begin{solution}
+To reverse the adjacency list, rather than transposing the adjacency matrix, we cycle through all nodes $u$ and for each edge to $v$, add $u$ to the beginning of the adjacency list for $v$.
+\begin{algorithmic}
+\ForAll{u $\in$ V}
+\ForAll{v $\in$ adj[u]}
+\State adj[v]$\gets$u
+\EndFor
+\EndFor
+\end{algorithmic}
+\end{solution}
+
+\begin{problem}[4]
+Assume the graph of the Web where a link $y$ stored in page $x$ is represented by a directed edge from $x$ to $y$.  Write pseudocode for printing the address of all the pages at distance $d$ from $p$. (The address can be derived from \verb|x.address|).
+\end{problem}
+
+\begin{solution}
+I'm going to use a modification of \code{DFS-Visit}, keeping track of how far away from $x$ we've traveled, printing the address once we have gone $d$ steps down.  I'll also assume that each node is at distance zero from itself.
+\begin{algorithmic}
+\Function{PagesAtDistance}{d, x}
+\If{d==0}
+\State print x.address
+\Else
+\ForAll{y $\in$ adj[x]}
+\State PagesAtDistance(d-1,y)
+\EndFor
+\EndIf
+\EndFunction
+\end{algorithmic}
+\end{solution}
+
+% Add pairs of problems and solutions as needed
+
+\end{document}

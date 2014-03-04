@@ -1,0 +1,192 @@
+\documentclass[12pt,letterpaper]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[ruled]{algorithm2e}
+\usepackage{zach}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{CS 575}
+\assignment{Theory Assignment 2}
+\duedate{September 24, 2013}
+
+\begin{document}
+
+\problemlist{}
+
+\begin{problem}[1]
+What is the time complexity $T(n)$ of the nest loops below?  For simplicity you may assume that $n$ is a power of 2.  That is $n = 2^k$ for some positive integer.  Find the count for \texttt{countMe}.
+\end{problem}
+
+\begin{solution}
+$T(n) = \BigO{(\lg n)^2}$
+\end{solution}
+
+\begin{problem}[2]
+What is the time complexity $T(n)$ of the nest loops below?  For simplicity you may assume that $n$ divides by 2.  That is $n = 2k$ for some positive integer.  Find the count for \texttt{countMe}.
+\end{problem}
+
+\begin{solution}
+$T(n) = \BigOmega{n^2}$. \texttt{countMe} executes $\sim \frac{1}{8} n^2$ times.
+\end{solution}
+
+\begin{problem}[3]
+Show using limits that when $b > a > 0$, $a^n \in o(b^n)$.
+\end{problem}
+
+\begin{solution}
+$\lim\limits_{n \to \infty} \frac{a^n}{b^n} = \lim\limits_{n \to \infty} \left(\frac{a}{b}\right)^n = 0$, since, when $b > a > 0$, $0 < \frac{a}{b} < 1$.  Therefore, $a^n \in o(b^n)$.
+\end{solution}
+
+\begin{problem}[4]
+Show using the original definitions that if $g(n) \in o(f(n))$ then $g(n) \in \BigO{f(n)} - \BigOmega{f(n)}$.
+\end{problem}
+
+\begin{solution}
+By definition $\LittleO{f(n)}$ is the set of $g(n)$ s.t $\forall c > 0$, $\exists N>0$ where $0 \leq g(n) < cf(n)$.  Since $\BigO{f(n)}$ is such a set where $\exists c > 0$ where $0 \leq g(n) \leq cf(n)$ and $\BigOmega{f(n)}$ is the similar set where $0 \leq cf(n) \leq g(n)$, subtracting the set of functions where $cf(n) \leq g(n)$ from the set of functions where $g(n) \leq cf(n)$ removes the case where $cf(n) = g(n)$, thus we have the set of functions where $0 \leq g(n) < cf(n)$, i.~e.~$\LittleO{f(n)}$.
+\end{solution}
+
+\begin{problem}[5]
+Fill in all the missing values. For column A you have to compute the sums. For column B you have to guess a function that does not contradict any of the yes/no answers in the next three columns. The last three columns contain yes/no answers. 
+\end{problem}
+
+\begin{solution}
+\begin{tabular}{|c|c|c|c|c|}
+\hline  Function & Function  & Big Oh & Omega & Theta  \\ 
+\hline $A$ & $B$  & $A = \BigO{B}$ & $A = \BigOmega{B}$  & $A = \BigTheta{B}$  \\ 
+\hline  $2^n$ & $5^{\ln n}$ & no & yes & no \\ 
+\hline $\sqrt{n}$ & $n$ & yes & no & no \\ 
+\hline $a^n$ for $a > 0$ & $n!$  & yes & no & no \\ 
+\hline $\ln n$ & $n^k$ where $k > 0$ & yes & no & no \\ 
+\hline $\sum\limits_{i=1}^{n} i = \frac{n(n+1)}{2} $& $n^2$ & yes & yes & yes \\ 
+\hline $\sum\limits_{i=0}^{n-1} 4^i = \frac{4^n -1}{3} $& $\lg n$ & no & yes & no \\ 
+\hline 
+\end{tabular}  
+\end{solution}
+
+\begin{problem}[6]
+Order the functions below by increasing growth rates.
+\[
+n^n, n\ln n, n^\eps \text{ where } 0 < \eps < 1, 2^{\lg n}, \ln n, 10, n^2
+\]
+\end{problem}
+
+\begin{solution}
+\[10, \ln n, n^\eps \text{ where } 0 < \eps < 1, 2^{\lg n}, n\lg n, n^2, n^n\]
+\end{solution}
+
+\begin{problem}[7]
+Let $f(n)$ and $g(n)$ be asymptotically positive functions. Prove or show a counter example for each of the following conjectures.
+\end{problem}
+
+\begin{problem}[7a]
+$f(n) = \BigOmega{g(n)}$ implies $f(n) = \BigTheta{g(n)}$.
+\end{problem}
+
+\begin{solution}
+Consider $f(n) = n^2$ and $g(n) = n$.  Then, $f(n) = \BigOmega{g(n)}$, because $n^2$ is bounded below by $n$.  However $\nexists c,d > 0$ such that $cn^2\leq n \leq dn^2$ for some $n$, so $f(n) \neq \BigTheta{g(n)}$.
+\end{solution}
+
+\begin{problem}[7b]
+$f(n) \in \BigO{g(n)}$ implies $\lg(f(n)) \in \BigO{\lg(g(n))}$ where $\lg(g(n)) > 0$ and $f(n) \geq 1$ for all sufficiently large $n$.  (Hint: consider $f(n) = 2^{1+\frac{1}{n}}$, $g(n) = 2^\frac{1}{n}$.)
+\end{problem}
+
+\begin{solution}
+Considering $f(n) = 2^{1+\frac{1}{n}}$, $g(n) = 2^\frac{1}{n}$, we have $f(n) \in \BigO{g(n)}$.  Now, $\lg(2^{1+\frac{1}{n}}) = 1+\frac{1}{n}$ and $\lg( 2^\frac{1}{n}) =\frac{1}{n}$. Taking $\lim\limits_{n \to \infty} \frac{1 + \frac{1}{n}}{\frac{1}{n}}$ implies $\lg(f(n)) = \BigOmega{\lg(g(n))}$, so the implication only holds when $\lg(f(n)) = \BigTheta{\lg(g(n))}$, but not for all such $f,g$.
+\end{solution}
+
+\begin{problem}[7c]
+$f(n) \in \BigO{g(n)}$ implies $2^{f(n)} \in \BigO{2^{g(n)}}$.  (Hint: consider $f(n) = 2n$ and $g(n) = n$.)
+\end{problem}
+
+\begin{solution}
+Taking $f(n) = 2n$ and $g(n) = n$, we have $2^{f(n)} = 2^{2n}$ and $2^{g(n)} = 2^n$.  Taking $\lim\limits_{n \to \infty} \frac{2^{2n}}{2^n} = \lim\limits_{n \to \infty} 2^n = \infty$ which again instead implies $2^{f(n)} = \BigOmega{2^{g(n)}}$.
+\end{solution}
+
+\begin{problem}[7d]
+$f(n) = \BigO{f(n)^2}$. (Hint: consider $f(n) = \frac{1}{n}$.)
+\end{problem}
+
+\begin{solution}
+Taking $f(n) = \frac{1}{n}$, we have $f(n)^2 = \frac{1}{n^2}$.  Taking $\lim\limits_{n \to \infty} \frac{\frac{1}{n}}{\frac{1}{n^2}} = \lim\limits_{n \to \infty} n = \infty$, which instead implies $f(n) = \BigOmega{f(n)^2}$.
+\end{solution}
+
+\begin{problem}[7e]
+$f(n) = \BigTheta{f(\frac{n}{2})}$.
+\end{problem}
+
+\begin{solution}
+Taking $f(n) = 2^n$, we have $f(\frac{n}{2}) = 2^\frac{n}{2}$.  Taking  $\lim\limits_{n \to \infty} \frac{2^n}{2^\frac{n}{2}} = \lim\limits_{n \to \infty} 2^\frac{n}{2} = \infty$.  Therefore, $f(n) = \BigOmega{f(\frac{n}{2})}$, but not necessarily in $f(n) = \BigTheta{f(\frac{n}{2})}$.
+\end{solution}
+
+\begin{problem}[8]
+Show that $n^2 - 2n - 10 \in \BigTheta{n^2}$ using both limits and the original definition.
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+\item Limits:
+\[\lim\limits_{n \to \infty} \frac{n^2 - 2n - 10}{n^2} = \lim\limits_{n \to \infty} 1 - \frac{2}{n} - \frac{10}{n^2} = 1 + 0 + 0 = 1\]
+which implies  $n^2 - 2n - 10 \in \BigTheta{n^2}$.
+
+\item From the definition:
+
+\begin{proof}
+By the definition of the set $\BigOmega{n^2}$, $\exists c,d,N > 0$ such that $cn^2 \leq n^2 - 2n - 10 \leq dn^2 \forall n \leq N$.  We will show that $n^2 - 2n - 10 \in \BigO{n^2}$ and $n^2 - 2n - 10 \in \BigOmega{n^2}$. From the definition of $\BigO{n^2}$, $\exists c,N > 0$ such that \[0 \leq n^2 - 2n - 10 \leq cn^2,  \forall n \leq N\].
+Dividing by $n^2$, we have $0 \leq 1 - \frac{2}{n} - \frac{10}{n^2} \leq c$, so we can clearly choose any $c \geq 1$.  For $c = 1$, we have $0 \leq 1 - \frac{2}{n} - \frac{10}{n^2} \leq 1$ for all $n \geq 4$, so we choose $N = 4$.
+
+To show $n^2 - 2n - 10 \in \BigOmega{n^2}$, there must exist $c,N > 0$ such that $0 \leq cn^2 \leq n^2 - 2n - 10$ for all $n \geq N$.
+Dividing by $n^2$, we have $0 \leq c \leq 1 - \frac{2}{n} - \frac{10}{n^2}$, which holds for all $c < 1$, so choose $c = \frac{1}{2}$.  We have $\frac{1}{2} \leq 1 - \frac{2}{n} - \frac{10}{n^2}$ for all $n \geq 7$, so we choose $N=7$.
+
+Thus, $n^2 - 2n - 10 \in \BigO{n^2}$ and $n^2 - 2n - 10 \in \BigOmega{n^2}$, so $n^2 - 2n - 10 \in \BigTheta{n^2}$.
+\end{proof}
+\end{itemize}
+\end{solution}
+
+\begin{problem}[Extra Credit 1]
+Give a $\BigTheta{\lg n}$ algorithm that computes the remainder when $x^n$ is divided by positive integer $p$.  For simplicity assume that $n$ is a power of 2.  That is $n = 2^k$ for some positive integer $k$. 
+\end{problem}
+
+\begin{solution}
+Based on an algorithm given by Bruce Schneier in Applied Cryptography\footnote{Found at \url{http://en.wikipedia.org/wiki/Modular_exponentiation}}, we can find the remainder using a binary search by computing \[ \prod\limits_{i=0}^{j-1} \left(x^{2^i}\right)^n_i \mod{p}\] where $n_i$ is the $i$th bit of $n$.  Thus, we have
+
+\begin{algorithm}[H]
+\SetAlgoLined
+result = 1\;
+\While{exponent $> 0$}{
+\If{exponent \textrm{mod} 2 == 1}{
+result = (result * base) mod modulus\;
+}
+exponent = exponent $>>$ 1\;
+base = (base * base) mod modulus\;
+}
+return result
+\end{algorithm}
+where \texttt{base, exponent}, and \texttt{modulus} refer to $x, n$, and $p$, respectively.
+\end{solution}
+
+\begin{problem}[Extra Credit 2]
+Write a $\BigTheta{n}$ algorithm that sorts $n$ distinct integers ranging in size between 1 and $kn$ inclusive.  $k$ is a positive integer and $k \ll n$.
+\end{problem}
+
+
+\begin{solution}
+The necessary algorithm here is a radix sort\footnote{\url{http://en.wikipedia.org/wiki/Radix_sort}}, which sorts the integers without using comparisons by looking iteratively at the place values.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwData{A[1..$n$] is a list of $k$-digit decimal integers, numbered right to left.}
+buckets[10]\;
+\For{i = 1 to k}{
+\For{j = 1 to n}{
+v = digit i of A[j]\;
+buckets[v] = A[j]\;
+}
+A $\leftarrow$ concatenation of buckets\;
+}
+return A\;
+\end{algorithm}
+
+\end{solution}
+
+\end{document}

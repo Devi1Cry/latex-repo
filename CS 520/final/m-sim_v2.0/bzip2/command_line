@@ -1,0 +1,1 @@
+bzip2 input.graphic 58 > input.graphic.out 2> input.graphic.err

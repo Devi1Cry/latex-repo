@@ -1,0 +1,15 @@
+**SINGLE CYCLE**
+bzip2: 1.0144
+equake: 1.9093
+gcc: 1.4402
+gzip: 1.0144
+mcf: 2.1908
+swim: 3.0624
+
+**PIPELINED**
+bzip2: 1.0144
+equake: 1.7579
+gcc: 1.3337
+gzip: 1.0144
+mcf: 2.1907
+swim: 2.8017

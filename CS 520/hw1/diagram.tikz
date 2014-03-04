@@ -1,0 +1,91 @@
+\tikzset{
+  nonterminal/.style={
+    % The shape:
+    rectangle,
+    % The size:
+    minimum size=6mm,
+    % The border:
+    very thick,
+    draw=red!50!black!50,         % 50% red and 50% black,
+                                  % and that mixed with 50% white
+    % The filling:
+    top color=white,              % a shading that is white at the top...
+    bottom color=red!50!black!20, % and something else at the bottom
+    % Font
+    font=\itshape
+  },
+  terminal/.style={
+    % The shape:
+    rounded rectangle,
+    minimum size=6mm,
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily},
+  skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}}
+}
+
+{
+  \tikzset{terminal/.append style={text height=1.5ex,text depth=.25ex}}
+  \tikzset{nonterminal/.append style={text height=1.5ex,text depth=.25ex}}
+}
+
+\begin{tikzpicture}[
+    >=latex,thick,
+    /pgf/every decoration/.style={/tikz/sharp corners},
+    fuzzy/.style={decorate,
+        decoration={random steps,segment length=0.5mm,amplitude=0.15pt}},
+    minimum size=6mm,line join=round,line cap=round,
+    terminal/.style={rectangle,draw,fill=white,fuzzy,rounded corners=3mm},
+    nonterminal/.style={rectangle,draw,fill=white,fuzzy},
+    node distance=4mm
+  ]
+
+    \ttfamily
+    \begin{scope}[start chain,
+            every node/.style={on chain},
+            terminal/.append style={join=by {->,shorten >=-1pt,
+                fuzzy,decoration={post length=4pt}}},
+            nonterminal/.append style={join=by {->,shorten >=-1pt,
+                fuzzy,decoration={post length=4pt}}},
+            support/.style={coordinate,join=by fuzzy}
+        ]
+        \node [nonterminal]                        {D};
+        \node [nonterminal]                        {RF};
+        \node [support]   (before)    {};
+        \node [terminal]  (stg1)      {};
+        \node [terminal]  (stg2)      {};
+        \node [terminal]  (stg3)      {};
+        \node [terminal]  (stg4)      {};
+        \node [support]   (after)     {};
+        \node [nonterminal]                        {MEM};
+        \node [nonterminal]                        {WB};
+    \end{scope}
+    \node (mul1)  [terminal,above=of stg1] {};
+    \node (add1) [terminal,below=of stg1] {};
+    \node (mul2)  [terminal,above=of stg2] {};
+    \node (add2) [terminal,below=of stg2] {X};
+    \node (mul3)  [terminal,above=of stg3] {};
+    \node (add3) [terminal,below=of stg3] {X};
+    \node (mul4)  [terminal,above=of stg4] {X};
+    \node (add4) [terminal,below=of stg4] {X};
+    
+    \node[draw,dotted,fit=(mul1) (mul2) (mul3) (mul4)] {MUL};
+    \node[draw,dotted,fit=(stg1) (stg2) (stg3) (stg4)] {DIV};
+	\node[draw,dotted,fit=(add1) (add2) (add3) (add4)] {ADD};
+	
+    \begin{scope}[->,decoration={post length=4pt},rounded corners=2mm,
+            every path/.style=fuzzy]
+     \draw (before) -- +(0,1) -- (mul1);
+     \draw (before) -- +(0,-1) -- (add1);
+     \draw (mul1) -- (mul2);
+     \draw (mul2) -- (mul3);
+     \draw (mul3) -- (mul4);
+     \draw (add1) -- (add2);
+     \draw (add2) -- (add3);
+     \draw (add3) -- (add4);
+     \draw (mul4) --  (after);
+     \draw (add4) -- (after);
+     
+    \end{scope}
+\end{tikzpicture}

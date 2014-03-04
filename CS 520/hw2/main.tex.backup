@@ -1,0 +1,88 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+\usepackage{enumitem}
+
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{CS 520--03}
+\assignment{Homework 2}
+\duedate{October 21, 2013}
+
+\begin{document}
+\begin{problem}[1]
+ Propose the format of an entry in the LSQ and the conditions for issuing a LOAD and a STORE instruction.  Assuming that registers are 64 bits wide and all LOAD and STORE instructions to have a 10-bit literal operand, what is the size of an individual LSQ entry in bits?
+\end{problem}
+
+\begin{solution}
+ An entry in the LSQ will need slots for the source and destination registers, one of which will be used by the LSFU to calculate the effective memory address.
+ A further 10 bits are used to store the third literal operand, and we need to include 1 bit to identify the entry as either a LOAD or a STORE operation as well as another single bit to mark whether the entry is ready for issue to the functional unit.
+ A STORE will be ready for issue once the value in its second operand is known.
+ A LOAD will be ready once the location of its second operand can be calculated.
+ Altogether, an entry like this will require 140 bits.
+\end{solution}
+
+\begin{problem}[2]
+ Assume that a separate register file is used to hold the architectural registers. For this problem, assume that the most recent instances of registers R0 through R7 are represented by physical registers P0 through P7 and all of these physical registers contain the proper values.
+\end{problem}
+
+\begin{problem}[2a]
+Show the contents of the rename table after all instructions in the above code fragment are dispatched.
+\end{problem}
+
+\begin{solution}
+ \begin{center}
+\begin{tabular}{l|l}
+R0 & P0\\
+R1 & P29\\
+R2 & P22\\
+R3 & P25\\
+R4 & P28\\
+R5 & P5\\
+R6 & P27\\
+R7 & P7
+ \end{tabular}
+ \end{center}
+
+\end{solution}
+
+
+\begin{problem}[2b]
+ What are the contents of FPRL, LSQ and IQ immediately after dispatching the MUL instruction?  You need to make sure that instruction issue, execution and writebacks are accounted for.  Assume a one-cycle writeback delay and a one-cycle delay for moving a ready instruction (which has been selected for issue) to the function unit.  Assume further that a physical register is freed up as soon as ALL of its consumers have been forwarded its value AND when it is no longer the most recent instance of the architectural register that it is currently associated with.
+\end{problem}
+
+\begin{solution}
+ \begin{itemize}
+  \item FPRL
+  
+\begin{tabular}{|c|}
+\hline
+P30 \\ \hline P31 \\ \hline P32 \\ \hline P33 \\ \hline P34 \\ \hline P35 \\ \hline P36 \\ \hline P37 \\ \hline P38 \\ \hline P39 \\ \hline P40 \\ \hline P41 \\ \hline P1 \\ \hline P2 \\ \hline P21 \\ \hline P4 \\ \hline P3 \\ \hline P24 \\ \hline P6 \\ \hline P26 \\ \hline P23\\
+\hline
+  \end{tabular}
+\item LSQ
+
+The load store queue is empty.  The last store has just been issued.
+\item IQ
+
+The issue queue contains instruction six, SUB, instruction seven, ADD, and the MUL just dispatched.
+ \end{itemize}
+
+\end{solution}
+
+\begin{problem}[3]
+ Assume the following....
+\end{problem}
+
+\begin{problem}[3a]
+ Show the contents of the (front-end) rename table and the back-end rename table (R-RAT) after all instructions in the above code fragment are dispatched.
+\end{problem}
+
+\begin{problem}[3b]
+ What are the contents of FPRL, LSQ and IQ immediately after dispatching the MUL instruction?  You need to make sure that instruction issue, execution and writebacks are accounted for.  Assume a one cycle writeback delay and a one cycle delay for moving a ready instruction (which has been selected for issue) to the function unit.  Assume that a physical register is freed up as soon as it's no longer the most recently committed instance of the associated architectural register.
+\end{problem}
+
+
+\end{document}
