@@ -24,7 +24,14 @@
  \begin{proof}
   We must show that $L^p\pa{X,\mu}$ is complete in the given norm.
   
-  First, let $\set{f_n}$ be Cauchy in $L^p$ with respect to $\norm{\cdot}_p$. It thus suffices to show that $\sum{\norm{f_n}_p} < \infty$ and $f_n$ converges to some $f \in L^p$. Since $p$ is finite, 
+  First, let $\set{f_n}$ be Cauchy in $L^p$ with respect to $\norm{\cdot}_p$, 
+with $\Sum{\norm{f_n}_p}{n,1,\infty} = M < \infty$. Define $g_n = 
+\Sum{f_k}{k,1,n}$. By the Minkowski inequality, then, we have 
+\[\norm{g_n}_p \leq \Sum{\norm{f_k}_p}{k,1,n} \leq M,\] therefore 
+\[\int g_n^p \leq M^p.\] Since $\set{g_n}$ is increasing it must converge to 
+some $g$ such that $g^p$ is measurable and finite a.e. Thus our sequence 
+$\set{f_n}$ converges so for $1 \leq p < \infty$, $L^p\pa{X,\mu}$ is a Banach 
+space.
  \end{proof}
 \end{solution}
 
@@ -33,17 +40,53 @@
  Let $\set{H_n}_{n=1}^\infty$ be a sequence of Hilbert spaces and let $H = \set{\set{x_n} : x_n \in H_n, \sum\norm{x_n}^2 < \infty}$. For $\set{x_n},\set{y_n} \in H$, $a,b \in \R$, define $a\set{x_n} + b\set{y_n} = \set{ax_n + by_n}$ and $\pa{\set{x_n},\set{y_n}} = \sum\pa{x_n,y_n}$. Then $H$ is a Hilbert space.
 \end{problem}
 
+\begin{solution}
+ \begin{proof}
+  First, we know the given function is an inner product because it relies on 
+the sum of inner products from the given sequence of Hilbert spaces.  We need 
+just to show the space is complete.
+  
+ \end{proof}
+
+\end{solution}
+
+
 \begin{problem}[4][10]
  Let $X$ be an inner product space and let $A \subset X$. then $A^\perp = \cl{A}^\perp$.
 \end{problem}
 
 \begin{problem}[5][10]
- Suppose that $H$ is a separable Hilbert space and $Y \subset H$ is a closed linear subspace. Then these is an orthonormal basis form $H$ consisting only of elements of $Y$ and $Y^\perp$.
+ Suppose that $H$ is a separable Hilbert space and $Y \subset H$ is a closed 
+linear subspace. Then there is an orthonormal basis for $H$ consisting only of 
+elements of $Y$ and $Y^\perp$.
 \end{problem}
+
+\begin{solution}
+ Since $Y$ is a closed linear subspace of $H$, we know that $H$ can be 
+described by $H = Y \oplus Y^\perp$ (this is comes from the direct sum theorm). 
+That is, every $h \in H$ can be written as $h = y + y'$ for some $y \in Y$ and 
+$y' \in Y^\perp$.  We can then find an orthnormal basis $\set{e_n}$ for $Y$ and 
+$\set{e_m}$ for $Y^\perp$ and we have $\set{e_n} \bigcup \set{e_m}$ and 
+orthonormal basis form $H$.
+\end{solution}
+
+
 
 \begin{problem}[6][15]
  Let $Y$ be a closed linear subspace of a Hilbert space $H$. If $Y \neq H$, then $Y^\perp \neq \set{0}$. Is this always true if $Y$ is not closed?
 \end{problem}
+
+\begin{solution}
+ \begin{proof}
+  Since $Y$ is a closed linear subspace of $H$, every $H$ can be expressed as 
+the sum of an element of $Y$ and an element of $Y^\perp$. Since $Y \neq H$, $H 
+\setminus Y$ is not empty. Thus, each $x \in H\setminus Y$ can be written as 
+$x+y$ for $x\in Y, y \in Y^\perp$, where $y$ is necessarily not 0, otherwise we 
+would have $x+y \in Y$.
+ \end{proof}
+
+\end{solution}
+
 
 \begin{problem}[7][10]
  Let $\func{T}{C\brk{0}{1}}{\R}$ is the linear transformation defined by
@@ -54,6 +97,15 @@
 \begin{problem}[7a]
  $T$ is continuous.
 \end{problem}
+
+\begin{solution}
+ \begin{proof}
+  \[\Abs{T(f)} = \Abs{\Int{f(x)}{x,0,1}} \leq \sup\Abs{f(x)} = \norm{f}\].
+  Thus $T$ is bounded and thus continuous.
+ \end{proof}
+
+\end{solution}
+
 
 \begin{problem}[7b]
  Find $\norm{T}$.
@@ -67,9 +119,27 @@
  Let $T$ be the linear transformation defined by \[T\pa{x_1,x_2,x_3,x_4,\dotsc} = \pa{0,4x_1,x_2,4x_3,x_4,\dotsc}.\] Then $\func{T}{\ell^2}{\ell^2}$ is continuous.
 \end{problem}
 
+\begin{solution}
+ \begin{proof}
+  Let $c \in \ell^\infty$ be defined by $\pa{0,4,1,4,1,\dotsc}$. For every $x 
+\in \ell^2$, we have 
+  \[\norm{Tx}^2 = \sum_n\Abs{c_i x_i}^2 = (\sup c_i)^2 \sum_n 
+\Abs{x_i}^2=16\norm{x}^2.\]
+Thus, every $Tx$ is bounded and therefore continuous.
+ \end{proof}
+
+\end{solution}
+
+
 \begin{problem}[8b]
  Find $\norm{T}$.
 \end{problem}
+
+\begin{solution}
+ Again, we can consider $Tx = cx$ with $c$ defined as above. So $\norm{T} = 
+\norm{c}_\infty = 4$.
+\end{solution}
+
 
 \begin{problem}
  Find $T^2$ and $\norm{T^2}$.
