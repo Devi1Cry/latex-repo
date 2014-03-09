@@ -1,0 +1,80 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Midterm: Exam 1}
+\duedate{March 11, 2014}
+
+\begin{document}
+\noindent Prove the following statements.  You need to provide a complete proof of each problem in order to get the full credit.
+
+\begin{problem}[1][10]
+ Let $\pa{X,\norm{\cdot}_1}$ and $\pa{Y,\norm{\cdot}_2}$ be two Banach spaces. If $Z = X \times Y$ (Cartesian product) with the norm given by $\norm{(x,y)} = \norm{x}_1 + \norm{y}_2$, then $\pa{Z,\norm{\cdot}}$ is a Banach space.
+\end{problem}
+
+\begin{problem}[2][10]
+ Let $\pa{X, \mathcal{M}, \mu}$ be a $\sigma$-finite measure space.  Then for $1 \leq p < \infty$, $L^p\pa{X,\mu}$ is a Banach space with the norm $\norm{f}_p = \pa{\Int{\Abs{f}^p}{\mu}}^{1/p}$.
+\end{problem}
+
+\begin{solution}
+ \begin{proof}
+  We must show that $L^p\pa{X,\mu}$ is complete in the given norm.
+  
+  First, let $\set{f_n}$ be Cauchy in $L^p$ with respect to $\norm{\cdot}_p$. It thus suffices to show that $\sum{\norm{f_n}_p} < \infty$ and $f_n$ converges to some $f \in L^p$. Since $p$ is finite, 
+ \end{proof}
+\end{solution}
+
+
+\begin{problem}[3][20]
+ Let $\set{H_n}_{n=1}^\infty$ be a sequence of Hilbert spaces and let $H = \set{\set{x_n} : x_n \in H_n, \sum\norm{x_n}^2 < \infty}$. For $\set{x_n},\set{y_n} \in H$, $a,b \in \R$, define $a\set{x_n} + b\set{y_n} = \set{ax_n + by_n}$ and $\pa{\set{x_n},\set{y_n}} = \sum\pa{x_n,y_n}$. Then $H$ is a Hilbert space.
+\end{problem}
+
+\begin{problem}[4][10]
+ Let $X$ be an inner product space and let $A \subset X$. then $A^\perp = \cl{A}^\perp$.
+\end{problem}
+
+\begin{problem}[5][10]
+ Suppose that $H$ is a separable Hilbert space and $Y \subset H$ is a closed linear subspace. Then these is an orthonormal basis form $H$ consisting only of elements of $Y$ and $Y^\perp$.
+\end{problem}
+
+\begin{problem}[6][15]
+ Let $Y$ be a closed linear subspace of a Hilbert space $H$. If $Y \neq H$, then $Y^\perp \neq \set{0}$. Is this always true if $Y$ is not closed?
+\end{problem}
+
+\begin{problem}[7][10]
+ Let $\func{T}{C\brk{0}{1}}{\R}$ is the linear transformation defined by
+ \[T(f) = \Int{f(x)}{x,0,1}.\]
+ Suppose that $C\brk{0}{1}$ is equipped with the $\sup$-norm.
+\end{problem}
+
+\begin{problem}[7a]
+ $T$ is continuous.
+\end{problem}
+
+\begin{problem}[7b]
+ Find $\norm{T}$.
+\end{problem}
+
+\begin{problem}[8][15]
+ Let $\ell^2$ be the set of real sequences $x = \pa{x_1,x_2,\dotsc}$ such that $\Sum{\Abs{x_n}^2}{n} < \infty$.
+\end{problem}
+
+\begin{problem}[8a]
+ Let $T$ be the linear transformation defined by \[T\pa{x_1,x_2,x_3,x_4,\dotsc} = \pa{0,4x_1,x_2,4x_3,x_4,\dotsc}.\] Then $\func{T}{\ell^2}{\ell^2}$ is continuous.
+\end{problem}
+
+\begin{problem}[8b]
+ Find $\norm{T}$.
+\end{problem}
+
+\begin{problem}
+ Find $T^2$ and $\norm{T^2}$.
+\end{problem}
+
+
+
+\end{document}
