@@ -16,6 +16,17 @@
  Let $\pa{X,\norm{\cdot}_1}$ and $\pa{Y,\norm{\cdot}_2}$ be two Banach spaces. If $Z = X \times Y$ (Cartesian product) with the norm given by $\norm{(x,y)} = \norm{x}_1 + \norm{y}_2$, then $\pa{Z,\norm{\cdot}}$ is a Banach space.
 \end{problem}
 
+\begin{solution}
+ \begin{proof}
+  Let $\set{(x_n,y_n)}$ in $Z$ with $\set{x_n}$ Cauchy in $X$ and $\set{y_n}$ Cauchy in $Y$.  Since $X$ and $Y$ are Banach spaces, there exist points $x \in X$, $y \in Y$ such that $\lim_{i\to\infty} \norm{x_i - x}_1 = 0$ and $\lim_{i\to\infty} \norm{y_i - y}_2 = 0$.
+  
+  Consider $\pa{x,y} \in Z$. We have \[\lim_{i\to\infty} \norm{(x_i, y_i) - (x,y)} = \lim_{i\to\infty} \norm{(x_i - x, y_i - y)} = \lim_{i\to\infty}\norm{x_i - x}_1 + \lim_{i\to\infty} \norm{y_i - y}_2 = 0.\]
+  
+  Thus, the Cauchy sequence $\set{(x_n,y_n)}$ has a limit in $Z$, so $Z$ is a Banach space.
+ \end{proof}
+\end{solution}
+
+
 \begin{problem}[2][10]
  Let $\pa{X, \mathcal{M}, \mu}$ be a $\sigma$-finite measure space.  Then for $1 \leq p < \infty$, $L^p\pa{X,\mu}$ is a Banach space with the norm $\norm{f}_p = \pa{\Int{\Abs{f}^p}{\mu}}^{1/p}$.
 \end{problem}
@@ -46,6 +57,7 @@ space.
 the sum of inner products from the given sequence of Hilbert spaces.  We need 
 just to show the space is complete.
   
+  The induced norm on this space is then $\norm{\set{x_n}} = \pa{\sum\pa{x_n,x_n}}^{1/2} = \pa{\sum\norm{x_n}^2}^{1/2}$, which is finite, by definition. Let $\set{x_n}$ be a Cauchy sequence in $H$, where each $\set{x_m} = \pa{x_1^m, x_2^m, \dotsc}$.
  \end{proof}
 
 \end{solution}
@@ -54,6 +66,14 @@ just to show the space is complete.
 \begin{problem}[4][10]
  Let $X$ be an inner product space and let $A \subset X$. then $A^\perp = \cl{A}^\perp$.
 \end{problem}
+
+\begin{solution}
+ \begin{proof}
+  This follows from the continuity of inner product. If for $x \in X$ $(x,a) = 0$ for all $a \in A$, then $x$ will also be orthogonal to all of the limit points of A.
+ \end{proof}
+
+\end{solution}
+
 
 \begin{problem}[5][10]
  Suppose that $H$ is a separable Hilbert space and $Y \subset H$ is a closed 
@@ -100,7 +120,7 @@ would have $x+y \in Y$.
 
 \begin{solution}
  \begin{proof}
-  \[\Abs{T(f)} = \Abs{\Int{f(x)}{x,0,1}} \leq \sup\Abs{f(x)} = \norm{f}\].
+  \[\norm{T(f)}_\infty = \norm{\Int{f(x)}{x,0,1}}_\infty \leq \max\pa{\Int{f(x)}{x,0,1}}\norm{f}_\infty\].
   Thus $T$ is bounded and thus continuous.
  \end{proof}
 
@@ -110,6 +130,17 @@ would have $x+y \in Y$.
 \begin{problem}[7b]
  Find $\norm{T}$.
 \end{problem}
+
+\begin{solution}
+ \begin{proof}
+  \begin{align*}
+   \norm{T} &= \sup \frac{\norm{Tf}}{\norm{f}} \\
+   {} &= \sup \frac{\norm{\Int{f(x)}{x,0,1}}_\infty}{\norm{f}_\infty} \\
+   {} &= \max\pa{\Int{f(x)}{x,0,1}}
+  \end{align*}
+ \end{proof}
+
+\end{solution}
 
 \begin{problem}[8][15]
  Let $\ell^2$ be the set of real sequences $x = \pa{x_1,x_2,\dotsc}$ such that $\Sum{\Abs{x_n}^2}{n} < \infty$.
@@ -141,10 +172,15 @@ Thus, every $Tx$ is bounded and therefore continuous.
 \end{solution}
 
 
-\begin{problem}
+\begin{problem}[8c]
  Find $T^2$ and $\norm{T^2}$.
 \end{problem}
 
+\begin{solution}
+ Since $T$ is defined as \[T\pa{x_1,x_2,x_3,x_4,\dotsc} = \pa{0,4x_1,x_2,4x_3,x_4,\dotsc},\] we can define $T^2$ by \[T^2\pa{x_1,x_2,x_3,x_4,\dotsc} = \pa{0,0,4x_1,4x_2,4x_3,4x_4,\dotsc}.\]
+ 
+ By a similar argument as above, we have $\norm{T^2} = 4$, also.
+\end{solution}
 
 
 \end{document}
