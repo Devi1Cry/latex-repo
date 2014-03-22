@@ -1,0 +1,60 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Homework 4}
+\duedate{March 27, 2014}
+
+\begin{document}
+
+\begin{problem}[1]
+  Let $X$ be a real linear space, $p$ a sublinear functional on $X$, $Y$ a subspace of $X$, and $f_{0}$ a linear functional on $Y$ such that $f_{0} \leq p(x)$ for all $x \in Y$.
+Then there exists a linear functional $f$ on $X$ such that $f(x) \leq p(x)$ for all $x \in X$ and $f|_{Y} = f_{o}$.
+\begin{itemize}
+\item Here for all $x,y \in X$ and $a \geq 0$, $\func{p}{X}{\R}$ satisfies \[p(x+y) \leq p(x) + p(y) \qquad \text{and} \qquad p(ax) = ap(x).\]
+\end{itemize}
+\end{problem}
+
+\begin{problem}[2]
+  Let $X$ be a real linear space and $A,B \subset X$ be nonempty, disjoint, convex subsets.
+  If $A$ is also open, then there exists $f \in X^{*}$ and $a \in \R$ such that \[f(x) < a < f(y), \qquad x \in A, y \in B.\]
+  
+  Hint: for $C = z_{0} + A - B \coloneqq \set{z_{0} + x - y : x \in A, y \in B}$, define Minkowski functional of $C$ by $p_{C}(x) = \inf \set{\alpha > 0 : \alpha^{-1}x \in C}$, for all $x \in X$.
+    The result is a sublinear functional on $X$ with $C = \set{x : p_{C}(x) < 1}$, and that there exists $c > 0$ such that $0 \leq p_{C}(x) \geq c\norm{x}$. 
+    You do not have to prove these two facts. 
+\end{problem}
+
+\begin{problem}[3]
+  Explain that the completeness of $X$ in Theorem 6.5.11 (principle of uniform boundedness) cannot be removed.
+
+  Hint: For example, consider $X = \set{x = (x_{n}) \in \ell^{2} : x_{n} \neq 0 \text{ for only finite many } n}$.
+\end{problem}
+
+\begin{problem}[4]
+  Let $\func{T}{X}{Y}$ be a bounded linear operator, where $X$ and $Y$ are Banach spaces.  
+  If $T$ is bijective, then there are two constants $a,b > 0$ such that $a\norm{x} \leq \norm{Tx} \leq b\norm{x}$, where $\norm{x}$ and $\norm{Tx}$ stand for the norms on $X$ and $Y$ respectively.
+\end{problem}
+
+\begin{problem}[5]
+  Let $X = C\brk{0}{1}$ with sup-norm and $Y$ be the subspace of functions $x \in X$ which have a continuous derivative.
+  Define $\func{T}{Y}{X}$ by $Tx = x'$, where the prime denotes differentiation.
+  Then $T$ is closed in the sense that its graph is closed.
+\end{problem}
+
+\begin{problem}[6]
+  Suppose that $S = \set{s_{\alpha} : \alpha \in A}$ is a set of points in $X$ such that $\overline{\Span}\set{S} = X$.
+  If $\set{f_{n}}$ is a bounded sequence in $X^{*}$ and $\set{f_{n}(s_{\alpha})}$ converges for all $\alpha \in A$, then there exists $f \in X^{*}$ such that $\lim_{n\to\infty} f_{n}(x) = f(x)$ for all $x\in X$.
+\end{problem}
+
+\begin{problem}[7]
+  Let $X$ be a finite-dimensional space, then for sequences $\set{x_{n}} \subset X$ and $\set{f_{n}^{*}} \subset X^{*}$, if there exist $x \in X$ and $f \in X^{*}$ such that $x_{n} \rightharpoonup x$ and $f_{n} \xrightharpoonup{*} f$, then we have $x_{n} \to x$ and $f_{n} \to f$.
+\end{problem}
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
