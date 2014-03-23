@@ -315,6 +315,8 @@ INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/bbm-macros/bbm.sty
 INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/bbm-macros/bbm.sty
 INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/base/fixltx2e.sty
 INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/base/fixltx2e.sty
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 INPUT MATH506-HW4.aux
 INPUT MATH506-HW4.aux
 OUTPUT MATH506-HW4.aux
@@ -358,6 +360,11 @@ INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam1
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/jknapltx/ursfs.fd
+INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/jknapltx/ursfs.fd
+INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
+INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
+INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/lm/omslmr.fd
 INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/lm/omslmr.fd
@@ -366,6 +373,7 @@ INPUT /usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ufplmbb.fd
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/mathpazo/fplmbb.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/mathpazo/fplmbb.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/mathpazo/fplmbb.tfm
+INPUT /usr/local/texlive/2013/texmf-dist/fonts/tfm/public/lm/rm-lmri12.tfm
 INPUT /usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 INPUT /usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 INPUT /usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/se-ascii-print.def

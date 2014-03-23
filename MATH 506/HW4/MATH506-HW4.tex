@@ -13,12 +13,28 @@
 
 \begin{problem}[1]
   Let $X$ be a real linear space, $p$ a sublinear functional on $X$, $Y$ a subspace of $X$, and $f_{0}$ a linear functional on $Y$ such that $f_{0} \leq p(x)$ for all $x \in Y$.
-Then there exists a linear functional $f$ on $X$ such that $f(x) \leq p(x)$ for all $x \in X$ and $f|_{Y} = f_{o}$.
+Then there exists a linear functional $f$ on $X$ such that $f(x) \leq p(x)$ for all $x \in X$ and $f|_{Y} = f_{0}$.
 \begin{itemize}
 \item Here for all $x,y \in X$ and $a \geq 0$, $\func{p}{X}{\R}$ satisfies \[p(x+y) \leq p(x) + p(y) \qquad \text{and} \qquad p(ax) = ap(x).\]
 \end{itemize}
 \end{problem}
 
+\begin{solution}
+  \begin{proof}
+    Let $E$ be the set of all linear extensions $g$ of $f_{0}$ with
+    $g(x) \leq p(x)$, with $E \neq \emptyset$, since $f_{0} \in E$.
+    If we define an ordering on $E$ where $g \leq h$ means $h$ is an
+    extension of $g$, then for each $C \subset E$, we can define $\hat{g}(x) = g(x)$ if $x\in \mathscr{D}(g)$ for $g \in C$, which is a linear functional with $\mathscr{D}(\hat{g}) = \bigcup_{g\in C}\mathscr{D}(g)$.  
+Then, we have $g \leq \hat{g}$ for all $g \in C$, and since $C$ was arbitrary, Zorn's lemma allows us to choose an maximal element of $E$, which we will call $f$.  
+By definition of $E$, we also have $f(x) \leq p(x)$.
+
+Now, we must show that $\mathscr{D}(f) = X$. Suppose this is not true.  
+Then, we can pick a $y_{1} \in X\setminus\mathscr{D}(f)$ and consider the subspace $Y_{1}$, where any $x \in Y_{1}$ can be written $x=y + \alpha y_{1}$ and define a functional $g_{1}$ on $Y_{1}$ by $g_{1}(y + \alpha y_{1}) = f(y) + \alpha c$, where $c \in \R$. 
+By this then, we have $f(x) \leq g_{1}(x)$, thus contradicting the maximality of $f$. 
+
+(Note: this is the Hahn-Banach Theorem as appearing in the book.)
+  \end{proof}
+\end{solution}
 \begin{problem}[2]
   Let $X$ be a real linear space and $A,B \subset X$ be nonempty, disjoint, convex subsets.
   If $A$ is also open, then there exists $f \in X^{*}$ and $a \in \R$ such that \[f(x) < a < f(y), \qquad x \in A, y \in B.\]
@@ -27,6 +43,10 @@ Then there exists a linear functional $f$ on $X$ such that $f(x) \leq p(x)$ for 
     The result is a sublinear functional on $X$ with $C = \set{x : p_{C}(x) < 1}$, and that there exists $c > 0$ such that $0 \leq p_{C}(x) \geq c\norm{x}$. 
     You do not have to prove these two facts. 
 \end{problem}
+
+\begin{solution}
+  
+\end{solution}
 
 \begin{problem}[3]
   Explain that the completeness of $X$ in Theorem 6.5.11 (principle of uniform boundedness) cannot be removed.
