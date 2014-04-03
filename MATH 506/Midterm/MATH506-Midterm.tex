@@ -22,7 +22,7 @@
   
   Consider $\pa{x,y} \in Z$. We have \[\lim_{i\to\infty} \norm{(x_i, y_i) - (x,y)} = \lim_{i\to\infty} \norm{(x_i - x, y_i - y)} = \lim_{i\to\infty}\norm{x_i - x}_1 + \lim_{i\to\infty} \norm{y_i - y}_2 = 0.\]
   
-  Thus, the Cauchy sequence $\set{(x_n,y_n)}$ has a limit in $Z$, so $Z$ is a Banach space.
+  Therefore, the Cauchy sequence $\set{(x_n,y_n)}$ has a limit in $Z$, so $Z$ is a Banach space.
  \end{proof}
 \end{solution}
 
@@ -38,11 +38,9 @@
   First, let $\set{f_n}$ be Cauchy in $L^p$ with respect to $\norm{\cdot}_p$, 
 with $\Sum{\norm{f_n}_p}{n,1,\infty} = M < \infty$. Define $g_n = 
 \Sum{f_k}{k,1,n}$. By the Minkowski inequality, then, we have 
-\[\norm{g_n}_p \leq \Sum{\norm{f_k}_p}{k,1,n} \leq M,\] therefore 
-\[\int g_n^p \leq M^p.\] Since $\set{g_n}$ is increasing it must converge to 
-some $g$ such that $g^p$ is measurable and finite a.e. Thus our sequence 
-$\set{f_n}$ converges so for $1 \leq p < \infty$, $L^p\pa{X,\mu}$ is a Banach 
-space.
+\[\norm{g_n}_p \leq \Sum{\norm{f_k}_p}{k,1,n} \leq M.\] By the monotone convergence theorem, $m = \Sum{\Abs{f_k}}{k,1,\infty} \in L^p$ and bounded by $B$.
+It follows, then, that $\Sum{f_k}{k,1,\infty}$ converges a.e. to some $f$, that $\Sum{f_k}{j,1,n}$ is dominated by $h$, and that it converges pointwise to $\Sum{f_k}{k,1,\infty}$.
+Therefore, by the dominated convergence theorem, we conclude that our sequence $\set{f_n}$ converges to the same $f \in L^p$, and thus $L^p$ is a Banach space. 
  \end{proof}
 \end{solution}
 

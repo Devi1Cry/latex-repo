@@ -1,0 +1,1 @@
+cmd_/home/zseymou1/latex-repo/CS_550/prog2/module/hello_proc.ko := ld -r -m elf_x86_64 -T /home/zseymou1/Downloads/linux-3.10.34/scripts/module-common.lds --build-id  -o /home/zseymou1/latex-repo/CS_550/prog2/module/hello_proc.ko /home/zseymou1/latex-repo/CS_550/prog2/module/hello_proc.o /home/zseymou1/latex-repo/CS_550/prog2/module/hello_proc.mod.o

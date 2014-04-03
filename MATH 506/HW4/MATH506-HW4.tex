@@ -1,0 +1,145 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Homework 4}
+\duedate{March 27, 2014}
+
+\begin{document}
+
+\begin{problem}[1]
+  Let $X$ be a real linear space, $p$ a sublinear functional on $X$, $Y$ a subspace of $X$, and $f_{0}$ a linear functional on $Y$ such that $f_{0} \leq p(x)$ for all $x \in Y$.
+Then there exists a linear functional $f$ on $X$ such that $f(x) \leq p(x)$ for all $x \in X$ and $f|_{Y} = f_{0}$.
+\begin{itemize}
+\item Here for all $x,y \in X$ and $a \geq 0$, $\func{p}{X}{\R}$ satisfies \[p(x+y) \leq p(x) + p(y) \qquad \text{and} \qquad p(ax) = ap(x).\]
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    Let $E$ be the set of all linear extensions $g$ of $f_{0}$ with
+    $g(x) \leq p(x)$, with $E \neq \emptyset$, since $f_{0} \in E$.
+    If we define an ordering on $E$ where $g \leq h$ means $h$ is an
+    extension of $g$, then for each $C \subset E$, we can define $\hat{g}(x) = g(x)$ if $x\in \mathscr{D}(g)$ for $g \in C$, which is a linear functional with $\mathscr{D}(\hat{g}) = \bigcup_{g\in C}\mathscr{D}(g)$.  
+Then, we have $g \leq \hat{g}$ for all $g \in C$, and since $C$ was arbitrary, Zorn's lemma allows us to choose an maximal element of $E$, which we will call $f$.  
+By definition of $E$, we also have $f(x) \leq p(x)$.
+
+Now, we must show that $\mathscr{D}(f) = X$. Suppose this is not true.  
+Then, we can pick a $y_{1} \in X\setminus\mathscr{D}(f)$ and consider the subspace $Y_{1}$, where any $x \in Y_{1}$ can be written $x=y + \alpha y_{1}$ and define a functional $g_{1}$ on $Y_{1}$ by $g_{1}(y + \alpha y_{1}) = f(y) + \alpha c$, where $c \in \R$. 
+By this then, we have $f(x) \leq g_{1}(x)$, thus contradicting the maximality of $f$. 
+
+(Note: this is the Hahn-Banach Theorem as appearing in the book.)
+  \end{proof}
+\end{solution}
+
+\begin{problem}[2]
+  Let $X$ be a real linear space and $A,B \subset X$ be nonempty, disjoint, convex subsets.
+  If $A$ is also open, then there exists $f \in X^{*}$ and $a \in \R$ such that \[f(x) < a < f(y), \qquad x \in A, y \in B.\]
+  
+  Hint: For $C = z_{0} + A - B \coloneqq \set{z_{0} + x - y : x \in A, y \in B}$, define Minkowski functional of $C$ by $p_{C}(x) = \inf \set{\alpha > 0 : \alpha^{-1}x \in C}$, for all $x \in X$.
+    The result follows from Problem 1 and the facts that $p_{C}$ is a sublinear functional on $X$ with $C = \set{x : p_{C}(x) < 1}$, and that there exists $c > 0$ such that $0 \leq p_{C}(x) \leq c\norm{x}$. 
+    You do not have to prove these two facts. 
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    Assuming we have such a $p_C$, we must find an $f_0$ such that $f_0(x) \leq p_C(x), \forall x \in M \subset X$.
+    We'll define $f_0(a z_0) \coloneqq a$.
+    Since $z_0 \not\in C$, we have $a^{-1}z_0 \not\in C$ if $a \in (0,1)$.
+    So we have $p_C(z_0) \geq 1$ so $f_0(az_0) \leq p_C(az_0)$ if $a \geq 0$.
+    Otherwise, $a < 0 \leq p(az_0)$.
+    So $f_0(x) \leq p_C(x)$ holds, so by Problem 1, we can extend $f_0$ to an $f \in X^*$.
+
+    Now, let $x \in A, y \in B$ and $z_0 + x - y \in C$.
+    Since $C$ is an open set, $\exists \eps > 0$ such that $(1 + \eps)(z_0 + x - y) \in C$.
+    Thus, it follows that  \[
+    p_C\pa{z_0 + x - y} \leq \frac{1}{1 + \eps}
+    \]
+    Thus, we have $f(x) - f(y) +1 = f(z_0 + x -y) \leq \frac{1}{1 + \eps}$, so $f(x) - f(y) < 0$.
+    Let $a = \sup\set{f(x) : s \in A}$, then we have \[
+    f(x) \leq a \leq f(y)
+    \]
+    for all $x \in A, y \in B$.
+  \end{proof}
+\end{solution}
+
+\begin{problem}[3]
+  Explain that the completeness of $X$ in Theorem 6.5.11 (principle of uniform boundedness) cannot be removed.
+
+  Hint: For example, consider $X = \set{x = (x_{n}) \in \ell^{2} : x_{n} \neq 0 \text{ for only finite many } n}$.
+\end{problem}
+
+\begin{solution}
+  If we had $X$ not Banach, we may have a sequence $\set{x_n} \in X$ that is bounded in norm but that does not converge to an $x \ in X$.
+
+Consider the set $X = \set{x = (x_{n}) \in \ell^{2} : x_{n} \neq 0 \text{ for only finite many } n}$.  
+Let $x_n$ be the sequence such that the $n$th element is $\frac{1}{n^2}$ with all others nonzero.
+Then, $\Sum{\norm{x_n}}{n,1,\infty} < \infty$, but $\sum{x_n}$ does not converge to a sequence in $X$.
+\end{solution}
+\begin{problem}[4]
+  Let $\func{T}{X}{Y}$ be a bounded linear operator, where $X$ and $Y$ are Banach spaces.  
+  If $T$ is bijective, then there are two constants $a,b > 0$ such that $a\norm{x} \leq \norm{Tx} \leq b\norm{x}$, where $\norm{x}$ and $\norm{Tx}$ stand for the norms on $X$ and $Y$ respectively.
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    By definition, since $T$ is bounded, there exists $c \in \R$ such that $\norm{Tx} \leq c\norm{x}$.
+    We will call this $b$.
+    Furthermore, as a consequence of the open mapping theorem, if $T$ is bijective, there exists a $T^{-1}$ that is also continuous and bounded.
+    Call the bound on $T^{-1}$ $a$ and the desired result follows.
+  \end{proof}
+\end{solution}
+
+\begin{problem}[5]
+  Let $X = C\brk{0}{1}$ with sup-norm and $Y$ be the subspace of functions $x \in X$ which have a continuous derivative.
+  Define $\func{T}{Y}{X}$ by $Tx = x'$, where the prime denotes differentiation.
+  Then $T$ is closed in the sense that its graph is closed.
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    We can use an application of the Closed Graph Theorem here to show $T$ is closed.
+    Let $\set{x_{n}} \in \Dom\pa{x}$ be such that $\set{x_{n}}$ and $\set{Tx_{n}}$ converge to \[
+    x_{n} \To x \qquad\text{ and }\qquad Tx_{n} = x_{n}' \To y.
+    \]
+    Since convergence on the norm of $C\brk{0}{1}$ is uniform, from $x_{n}' \To y$, we have \[
+    \Int{y(t)}{t,0,t} = \Int{\lim_{n\to\infty}x_{n}'(t)}{t,0,t} = \lim_{n\to\infty}\Int{x_{n}'(t)}{t,0,t} = x(\tau) - x(0), 
+    \]
+which gives \[
+x(\tau) = x(0) + \Int{y(t)}{t,0,t}.
+\]
+This means $x \in \Dom{}(x)$ and $x' = y$, so from our closed linear operator theorem, we conclude $T$ is closed.
+  \end{proof}
+\end{solution}
+
+\begin{problem}[6]
+  Suppose that $S = \set{s_{\alpha} : \alpha \in A}$ is a set of points in $X$ such that $\overline{\Span}\set{S} = X$.
+  If $\set{f_{n}}$ is a bounded sequence in $X^{*}$ and $\set{f_{n}(s_{\alpha})}$ converges for all $\alpha \in A$, then there exists $f \in X^{*}$ such that $\lim_{n\to\infty} f_{n}(x) = f(x)$ for all $x\in X$.
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    We have as a corollary to the Uniform Boundedness principle, that if a sequence of bounded operators converges pointwise for all $x \in X$, the limits define an operator $T$.
+    Taking $\set{f_n}$ as our operators and $f \in X^*$ our limit, since $S$ is dense in $X$, the existence of $f$ follows.
+  \end{proof}
+\end{solution}
+
+\begin{problem}[7]
+  Let $X$ be a finite-dimensional space, then for sequences $\set{x_{n}} \subset X$ and $\set{f_{n}^{*}} \subset X^{*}$, if there exist $x \in X$ and $f \in X^{*}$ such that $x_{n} \rightharpoonup x$ and $f_{n} \xrightharpoonup{*} f$, then we have $x_{n} \to x$ and $f_{n} \to f$.
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    From the proof of Theorem 4.8-4, we have that strong convergence
+    and weak convergence are equivalent is $\dim X < \infty$. Thus, if we have $x \in X$ and $f \in X^{*}$ such that $x_{n} \rightharpoonup x$ and $f_{n} \xrightharpoonup{*} f$, we also have $x_{n} \to x$ and $f_{n} \to f$.
+  \end{proof}
+\end{solution}
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

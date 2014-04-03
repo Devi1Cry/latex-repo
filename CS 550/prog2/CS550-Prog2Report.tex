@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+
+\usepackage{commons}
+\usepackage{xspace}
+
+\title{CS 550: Program 2}
+\author{Zachary Seymour}
+
+\begin{document}
+\maketitle
+
+\section{Configuring and compiling the Linux Kernel}
+\label{sec:conf-comp-linux}
+For compiling the kernel, I mainly followed the instructions provided in the assignment with little change.
+I ran into a few issues when setting up via \verb|make menuconfig|.
+In particular, I at first removed the NFS filesystem, which made the system unable to boot, probably an issue with the PXE boot system.
+Once I had resolved this issue and had a successful boot to log-in, I had no working mouse or keyboard.
+From there, I learned about UHCI, added the necessary modules, recompiled and rebooted successfully.
+
+\section{System calls}
+\label{sec:system-calls}
+\inputminted{c}{my_xtime.c}
+While implementing the required system call, I found that the \verb|timekeeper| struct no longer had the \verb|xtime| member, as of around March 2012.
+From there, I found the \verb|getnstimeofday(struct timespec)| function, which allowed me to fill a \verb|struct timespec| and then copy it to user-level memory.
+My code for this can be seen above, and my user-level program to test it follows.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/use_mycall.c}
+
+\section{Kernel Module}
+\label{sec:kernel-module}
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/module/xtime_proc.c}
+
+Implementing my module was fairly straight forward.
+I found a few tutorials online, which led to me finding the \verb|single-open| and \verb|seq_printf| functions, which were key to writing to my file.
+From there, it was merely an matter of filling out the \verb|struct timespec| again and printing the two values.
+Once again, my code for the module is above, with my user-level test below.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/use_module.c}
+
+\section{Experimenting with ``Bad'' Code}
+\label{sec:exper-with-bad}
+I tried several of the suggested experiments to crash the module.
+
+\subsection{Using Library Functions}
+\label{sec:using-libr-funct}
+
+First, I tried to use a standard C library function, as seen below, but the module would not even compile.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-libfunction.c}
+
+\subsection{Dereferencing a null pointer}
+\label{sec:deref-null-point}
+
+Next, I tried to dereference a null pointer.  I did not get an immediate crash, but the logs showed an error.
+\begin{verbatim}
+[ 5297.159493] CPU: 0 PID: 4139 Comm: insmod Tainted: P           O 3.10.34 #6
+[ 5297.159495] Hardware name: Hewlett-Packard HP Z210 Workstation/1588h, BIOS J51 v01.20 09/16/2011
+[ 5297.159498]  ffffffff81393ac2 0000000000000164 ffffffff81031a7c ffff880224c73340
+[ 5297.159503]  ffff88021cf9bd08 0000000000000286 ffff880223890cc0 ffffffff81643860
+[ 5297.159507]  0000000000000000 ffff88021d817740 ffffffff81031b32 ffffffff814efaf2
+[ 5297.159512] Call Trace:
+[ 5297.159518]  [<ffffffff81393ac2>] ? dump_stack+0x10/0x1e
+[ 5297.159524]  [<ffffffff81031a7c>] ? warn_slowpath_common+0x5f/0x77
+[ 5297.159528]  [<ffffffff81031b32>] ? warn_slowpath_fmt+0x45/0x4a
+[ 5297.159533]  [<ffffffff81151120>] ? proc_alloc_inum+0x47/0xa0
+[ 5297.159537]  [<ffffffff81151253>] ? proc_register+0xda/0x10b
+[ 5297.159542]  [<ffffffff81151312>] ? proc_create_data+0x8e/0xa6
+[ 5297.159546]  [<ffffffffa000e000>] ? 0xffffffffa000dfff
+[ 5297.159551]  [<ffffffffa000e01e>] ? xtime_proc_init+0x1e/0x1000 [xtime_proc_nullptr]
+[ 5297.159555]  [<ffffffff81000240>] ? do_one_initcall+0x78/0x104
+[ 5297.159560]  [<ffffffff8107ce21>] ? load_module+0x13e4/0x1690
+[ 5297.159563]  [<ffffffff8107a94a>] ? set_section_ro_nx+0x58/0x58
+[ 5297.159567]  [<ffffffff8107d203>] ? SyS_init_module+0xb9/0xbd
+[ 5297.159572]  [<ffffffff8139b052>] ? system_call_fastpath+0x16/0x1b
+[ 5297.159575] ---[ end trace e5f6b208aba6d633 ]---
+\end{verbatim}
+
+\inputminted{c}{\string~/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-nullptr.c}
+
+\subsection{Returning Non-zero from Initialization}
+\label{sec:returning-non-zero}
+
+Next, I returned a non-zero value from the \verb|init| function.
+This had a similar effect as the previous attempt; however, the module seemed to just ignore the error, as seen in the following log:
+\begin{verbatim}
+[ 5869.234331] do_init_module: 'xtime_proc_nonzeroinit'->init suspiciously returned 596184512, it should follow 0/-E convention
+[ 5869.234331] do_init_module: loading module anyway..
+\end{verbatim}
+
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-nonzeroinit.c}
+
+\subsection{Calling the \texttt{panic} Function}
+\label{sec:call-panic-funct}
+
+Finally, wanting to truly see what a kernel panic would look like, without causing too much damage or spending too much more time, I called \verb|panic()| from kernel-level code and shutdown the system.
+\inputminted{c}{\string~/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-panic.c}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
