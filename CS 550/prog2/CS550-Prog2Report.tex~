@@ -1,0 +1,72 @@
+\documentclass[11pt]{article}
+
+\usepackage{commons}
+\usepackage{xspace}
+
+\title{CS 550: Program 2}
+\author{Zachary Seymour}
+
+\begin{document}
+\maketitle
+
+\section{Configuring and compiling the Linux Kernel}
+\label{sec:conf-comp-linux}
+For compiling the kernel, I mainly followed the instructions provided in the assignment with little change.
+I ran into a few issues when setting up via \verb|make menuconfig|.
+In particular, I at first removed the NFS filesystem, which made the system unable to boot, probably an issue with the PXE boot system.
+Once I had resolved this issue and had a successful boot to log-in, I had no working mouse or keyboard.
+From there, I learned about UHCI, added the necessary modules, recompiled and rebooted successfully.
+
+\section{System calls}
+\label{sec:system-calls}
+\inputminted{c}{my_xtime.c}
+While implementing the required system call, I found that the \verb|timekeeper| struct no longer had the \verb|xtime| member, as of around March 2012.
+From there, I found the \verb|getnstimeofday(struct timespec)| function, which allowed me to fill a \verb|struct timespec| and then copy it to user-level memory.
+My code for this can be seen above, and my user-level program to test it follows.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/use_mycall.c}
+
+\section{Kernel Module}
+\label{sec:kernel-module}
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/module/xtime_proc.c}
+
+Implementing my module was fairly straight forward.
+I found a few tutorials online, which led to me finding the \verb|single-open| and \verb|seq_printf| functions, which were key to writing to my file.
+From there, it was merely an matter of filling out the \verb|struct timespec| again and printing the two values.
+Once again, my code for the module is above, with my user-level test below.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/use_module.c}
+
+\section{Experimenting with ``Bad'' Code}
+\label{sec:exper-with-bad}
+I tried several of the suggested experiments to crash the module.
+
+\subsection{Using Library Functions}
+\label{sec:using-libr-funct}
+
+First, I tried to use a standard C library function, as seen below, but the module would not even compile.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-libfunction.c}
+
+\subsection{Dereferencing a null pointer}
+\label{sec:deref-null-point}
+
+Next, I tried to dereference a null pointer.  I did not get an immediate crash, but the logs showed an error.
+\inputminted{c}{\string~/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-nullptr.c}
+
+\subsection{Returning Non-zero from Initialization}
+\label{sec:returning-non-zero}
+
+Next, I returned a non-zero value from the \verb|init| function.
+This had a similar effect as the previous attempt; however, the module seemed to just ignore the error.
+\inputminted{c}{/home/zach/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-nonzeroinit.c}
+
+\subsection{Calling the \texttt{panic} Function}
+\label{sec:call-panic-funct}
+
+Finally, wanting to truly see what a kernel panic would look like, without causing too much damage or spending too much more time, I called \verb|panic()| from kernel-level code and shutdown the system.
+\inputminted{c}{\string~/irene/docs/latex-repo/CS_550/prog2/module/errors/xtime_proc-panic.c}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

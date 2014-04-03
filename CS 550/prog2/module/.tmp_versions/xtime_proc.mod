@@ -1,2 +1,2 @@
-/home/zseymou1/latex-repo/CS_550/prog2/module/xtime_proc.ko
-/home/zseymou1/latex-repo/CS_550/prog2/module/xtime_proc.o
+/home/zach/irene/docs/latex-repo/CS_550/prog2/module/xtime_proc.ko
+/home/zach/irene/docs/latex-repo/CS_550/prog2/module/xtime_proc.o
