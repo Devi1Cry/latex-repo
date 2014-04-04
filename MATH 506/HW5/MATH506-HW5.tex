@@ -1,0 +1,111 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Homework 5}
+\duedate{April 8, 2014}
+
+\begin{document}
+\noindent Prove the following statements:
+
+\begin{problem}[1]
+  Let $H$, $K$, and $L$ be Hilbert spaces, let $R,S \in B(H,K)$ and let $T \in B(K,L)$. Let $\lambda, \mu \in \R$.
+  Then
+  \begin{enumerate}[label=(\alph*)]
+  \item $(\mu R + \lambda S)^* = \mu R^* + \lambda S^*$;
+  \item $(TR)^* = R^*T^*$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    For (a), we have for all $x \in H$ and $y \in K$
+    \begin{align*}
+      (x,(\mu R + \lambda S)^* y) &= ((\mu R + \lambda S) x, y) \\
+      {} &= (\mu Rx, y) + (\lambda Sx, y) \\
+      {} &= (x, \mu R^* y) + (x, \lambda S^* y) \\
+      {} &= (x, (\mu R^* + \lambda S^*) y )\\
+    \end{align*}
+    Thus, for all $y$, we have $(\mu R + \lambda S)^* = \mu R^* + \lambda S^*$.
+
+    For (b), we have \[
+    (x,(TR)^* y) = ((TR)x, y) = (Rx, T^*y) = (x, R^*T^*y).\
+    \]
+
+  \end{proof}
+\end{solution}
+
+\begin{problem}[2]
+  Let $H$ be a Hilbert space and let $T \in B(H)$. Then
+  \begin{enumerate}[label=(\alph*)]
+  \item $\Ker(T) = \Ker(T^*T).$
+  \item $\cl{\Image(T^*)} = \cl{\Image(T^*T)}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    \label{prf:1}
+    For (a), we first show that $\norm{T^*} = \norm{TT^*} = \norm{T}^2$.
+    From the Schwarz inequality, we have \[
+    \norm{Tx}^2 = (Tx, Tx) = (T^*Tx, x) \leq \norm{T^*Tx}\norm{x} \leq \norm{T^*Tx}\norm{x}^2. 
+    \]
+    Then, taking the supremum over all $x, \norm{x} = 1$, we have $\norm{T}^2 \leq \norm{T^*T}$.
+    Applying some properties of adjoint, we then have \[
+    \norm{T}^2 \leq \norm{T^*T} \leq \norm{T^*}\norm{T} = \norm{T}^2.
+    \]
+    Thus, $\norm{T^*T} = \norm{T}^2$. 
+    Replacing $T$ with $T^*$, we have also $\norm{T^{**}T^*} = \norm{TT^*} = \norm{T}^2$, since $T^{**} = T$.
+    From this result, we have $T^*T = 0$ iff $T = 0$, thus, the kernels are equal.
+  \end{proof}
+\end{solution}
+
+\begin{problem}[3]
+  Let $H$ be a Hilbert space, and $T \in B(H)$ be a self-adjoint operator.  Then for all $\mu \in V(T)$,
+  \[
+  \inf \set{\lambda : \lambda \in \sigma(T)} \leq \mu \leq \sup\set{\lambda : \lambda \in \sigma(T)}.
+  \]
+
+\end{problem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{problem}[4]
+  Let $H$ be a Hilbert space.  If $Q$ is an orthogonal projection in $B(H)$ then $\Image(Q)$ is a closed linear subspace and $Q = P_{\Image(Q)}$.
+\end{problem}
+
+\begin{solution}
+  
+\end{solution}
+
+\begin{problem}[5]
+  Let $H$ be a Hilbert space and let $P,Q \in B(H)$ be orthogonal projections.
+  \begin{enumerate}[label=(\alph*)]
+  \item If $PQ = QP$, then $PQ$ is an orthogonal projection.
+  \item $\Image(P)$ is orthogonal to $\Image(Q)$ iff $PQ = 0$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  
+\end{solution}
+
+\begin{problem}[6]
+  Let $H$ be a Hilbert space and let $y,z \in H$.  Define $T \in B(H)$ by $Tx = (x,y)z$. Then $T$ is compact.
+\end{problem}
+
+\begin{solution}
+  
+\end{solution}
+
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
