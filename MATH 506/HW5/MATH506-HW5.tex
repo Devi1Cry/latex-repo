@@ -1,3 +1,4 @@
+
 \documentclass[12pt,letterpaper,twoside]{hmcpset}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
@@ -73,7 +74,17 @@
 \end{problem}
 
 \begin{solution}
-
+  \begin{proof}
+    \label{prf:5}
+    For self-adjoint operators we have $\inf\sigma(T) = \inf\set{(Tx,x) : \norm{x} = 1}$ and $\sup\sigma(T) = \sup\set{(Tx,x) : \norm{x} =1 }$.
+    Furthermore, for $T$ bounded and self-adjoint, we can define $\func{v}{H}{\R} : x \mapsto (Tx, x)$.
+    Since $V(T) = v(B)$, where $B = \set{x \in H : \norm{x} = 1}$ and $T$ is bounded, we conclude $V(T)$ is bounded.
+    Furthermore, since $B$ is connected and $V(T)$ is the continuous of image of $B$, we have $V(T)$ connected and bounded.
+    Therefore, we can express $V(T)$ as an interval at least of the form $(m,M)$, where \[
+    m = \inf v(x) = \inf\sigma(T) \qquad \text{and} \qquad M = \sup v(x) = \sup\sigma(T).
+    \]
+    Thus, each $m \leq \mu \leq M$ for each $\mu \in V(T)$.
+  \end{proof}
 \end{solution}
 
 \begin{problem}[4]
@@ -81,7 +92,15 @@
 \end{problem}
 
 \begin{solution}
-  
+  \begin{proof}
+    \label{prf:2}
+    Since $Q$ is an orthogonal projection in $H$, we have $H = \Ker(Q) \oplus \Image(Q)$.
+    If we take $x = Qy$ and $z \in \Ker(Q)$, then \[
+    (x,z) = (Qy,z) = (y, Qz) = 0
+    \]
+    so we have $\Image(Q) \perp \Ker(Q)$.
+    Thus, $H$ is the orthogonal direct sum of the image and kernel of $Q$, so $Image(Q) = \Ker(Q)^\perp$; therefore, $Q$ is closed.
+  \end{proof}
 \end{solution}
 
 \begin{problem}[5]
@@ -93,7 +112,13 @@
 \end{problem}
 
 \begin{solution}
-  
+  \begin{proof}
+    \label{prf:3}
+    First, we note that since $P$ and $Q$ are projections, we have $P = P^2$ and $Q = Q^2$.
+    Also, we have $P$ and $Q$ are self-adjoint.
+    For (a), then, we have $PQ = QP = Q^* P^* = (PQ)^*$; thus, $PQ$ is also self-adjoint.
+    We then also have $(PQ)^2 = PQPQ = PPQQ = P^2Q^2 = PQ$, so it follows that PQ is a projection.
+  \end{proof}
 \end{solution}
 
 \begin{problem}[6]
@@ -101,7 +126,10 @@
 \end{problem}
 
 \begin{solution}
-  
+  \begin{proof}
+    \label{prf:4}
+    If we take $T = RS$, where $Rx = (x,y)$ and $Sx = z$, where $S$ is definitely compact (since it is constant), then we have two bounded operators, one of which is compact, so their product must be compact.
+  \end{proof}
 \end{solution}
 
 \end{document}
