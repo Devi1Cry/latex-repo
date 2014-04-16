@@ -1,0 +1,181 @@
+\documentclass[12pt,letterpaper,twoside]{hmcpset}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{commons}
+
+% info for header block in upper right hand corner
+\name{Zachary Seymour}
+\class{MATH 506}
+\assignment{Midterm 2}
+\duedate{April 22, 2014}
+
+\begin{document}
+\noindent Prove the following statements. You need to provide a complete proof of each problem in order to get the full credit.
+
+\begin{problem}[1][10]
+  A Banach space $X$ is reflexive iff $X^*$ is reflexive.
+\end{problem}
+
+\begin{solution}
+  We will first prove this theorem:
+  \begin{thm}
+    \label{thr:1}
+    Every closed subspace of a reflexive normed space is reflexive.
+  \end{thm}
+  \begin{proof}
+    Let $X$ be a Banach space and $M \subset X$ be a closed subspace.
+    Also, let $Q$ be the natural mapping of $X$ onto $X^{**}$.
+    We can see that $x \in (M^\perp)^\perp$ iff $Qx \in M^{\perp\perp}$.
+    Since, $M$ is closed, we have from before $(M^\perp)^\perp = M$.
+    So, we have $Q(M) = M^{\perp\perp}$.
+    
+    Now, take $m^{**} \in M^{**}$  and $m^{\perp\perp}$ be the corresponding member of $ M^{\perp\perp}$.
+    Then there is an $m$ such that $Qm = m^{\perp\perp}$, so for each $x^* + M^\perp \in M^*$, \[
+    (x^* + M^\perp, m^{**}) = m^{\perp\perp}x^* = x^*m = (m,x^* + M^\perp).
+    \]
+    Thus, we have $M$ reflexive.
+  \end{proof}
+  Now, we give the proof for the problem statement:
+  \begin{proof}
+   First, we assume $X$ is reflexive.
+   Let $Q$ and $Q_*$ be the natural maps from $X$ and $X^*$ into $X^{**}$ and $X^{***}$ respectively, and $x^{***} \in X^{***}$
+   If we take an $x^{**} \in X^{**}$ and $x = Q^{-1}x^{**}$, then \[
+   (x^{**},x^{***}) = (Qx,x^{***} = (x,x^{***}Q) = (x^{***}Q, x^{**}),
+   \]
+   so we have $x^{***} = Q_*(x^{***}Q)$.
+   Since $Q_*$ is onto $X^{***}$, $X^*$ is reflexive.
+
+   Now, suppose $X^*$ is reflexive.
+   Then, both $X^{**}$ and its closed subspace $Q(X)$ are reflexive, by Theorem~\ref{thr:1}.
+   Therefore, $X$ is reflexive since it is isomorphic to $Q(X)$.
+  \end{proof}
+\end{solution}
+
+\begin{problem}[2][15]
+  Let $H$ be a Hilbert space and let $P,Q \in B(H)$ be orthogonal projections.
+  Then the following statements are equivalent.
+  
+  \begin{enumerate}[label=(\alph*)]
+  \item $\Image(P) \subset \Image(Q)$;
+    \item $QP = P$;
+      \item $PQ = P$;
+    \item $\norm{Px} \leq \norm{Qx}$ for all $x \in H$;
+    \item $P \leq Q$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{proof}
+    First, assume (a).
+    Then, for every $h \in H$, $\exists q \in H$ with $Ph = Qq$.
+    Therefore, $QPh = QQq = Qq = Ph$.
+    Thus, $QP = P$ and (a) $\implies$ (b).
+
+    Now, we show (b) $\Leftrightarrow$ (c).
+    Suppose $QP = P$.
+    Then, $Q = Q + P - QP$, so we can compute $Q^* = (Q + P - QP)^* = Q^* + P^* - P^*Q^*$, since adjoint is linear.
+    Thus we have $Q^* + P^* - P^*Q^* = Q + P - PQ$, so we necessarily have $QP = PQ = P$.
+    The equivalence can be show by swapping $PQ$ above.
+  \end{proof}
+\end{solution}
+\begin{problem}[3][15]
+  Let $X$ be a Banach space, and $\set{f_n} \subset X^*$.  Given $1 < p < \infty$, the following two statements are equivalent.
+  \begin{enumerate}[label=(\alph*)]
+  \item If $\Sum{\norm{x_n}^p}{n,1,\infty}$, where $x_n \in X$ for each $n$, then $\Sum{f_n(x_n)}{n,1,\infty} < \infty$;
+  \item The series $\Sum{f_n}{n,1,\infty}$ satisfies $\Sum{\norm{f_n}^q}{n,1,\infty} < \infty$, where $q$ is the conjugate of p, \ie{} $\frac{1}{p} + \frac{1}{q} = 1$. 
+  \end{enumerate}
+
+\end{problem}
+
+\begin{problem}[4][15]
+  Let $H$ be a Hilbert space and $G \subset H$ a closed linear subspace.
+  \begin{enumerate}[label=(\alph*)]
+  \item Any bounded linear functional on $G$ has a unique Hanh-Banach extension on $H$.
+  \item Given $a \in H$, $a \not= 0$, let $G = \set{x \in H : (x,a) = 0}$.
+    If $f_0 \in G^*$ is given by $f_0(x) = (x,b)$, for some $b \in H$, find the expression of the Hahn-Banach extension $f \in H^*$ of $f_0$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}
+  We begin by proving the following theorem:
+  \begin{thm}
+    \label{thr:2}
+    Every Hilbert space is uniformly convex.
+  \end{thm}
+  \begin{proof}
+    To begin, we define a uniformly convex space as a normed vector space such that for every $\eps > 0, \exists \delta > 0$ such that, with $\norm{x} = 1$ and $\norm{y} = 1$, $\norm{x -y} \geq \eps$ implies that $\norm{\frac{x+y}{2}} \leq 1 - \delta$.
+    Let $H$ be a Hilbert space.
+    Now, let $\eps > 0$ and $x,y \in H$ with $\norm{x} = \norm{y} = 1$ and $\norm{x - y} \geq \eps$.
+    Also, let $\delta = 1 - \frac{1}{2}\sqrt{4 - \eps^2}$.
+    Then, we have $\delta > 0$, and using the parallelogram law:
+    \begin{align*}
+      \norm{x + y} &= \norm{x +y}^2 + \norm{x - y}^2 - \norm{x - y}^2 \\
+      {} &= 2\norm{x}^2 + 2\norm{y}^2 - \norm{x - y}^2 \\
+      {} &\leq 4 - \eps^2 \\
+      {} &= 4(1-\delta)^2.
+    \end{align*}
+    Thus, $\norm{\frac{x+y}{2}} \leq 1 - \delta$.
+    So, $H$ is uniformly convex.
+  \end{proof}
+  We now give a proof of the Taylor-Foguel Theorem (1958) to address (a) above.
+  \begin{thm}[Taylor-Foguel Theorem]
+    \label{thr:taylor}
+    Let $X$ be a normed space. For every subspace $Y$ of $X$ and every $g \in Y^*$, there is a unique Hahn-Banach extension of $g$ to $X$ iff $X^*$ is strictly convex.
+  \end{thm}
+  \begin{proof}
+    We will only give a proof for the reverse direction; that is, if $X^*$ is strictly convex, there exists a unique Hahn-Banach extension of $g$ to $X$.
+    So, we start by assuming $X^*$ is strictly convex.  Let $Y$ be a subspace of $X$, $g \in Y^*$, and let $f_1$ and $f_2$ be two Hahn-Banach extensions of $g$ to $X$.
+    Also, we will assume $g$ is non-zero, and, without loss of generality, assume $\norm{g} = 1$.
+    From this, we see that $\frac{f_1 + f_2}{2}$ is a continuous linear extension of $g$ to $X$ and that $\norm{\frac{f_1 + f_2}{2}} = \norm{g} = 1$.
+    Since, we have $\norm{f_1} = \norm{f_2} = \norm{g} = 1$, the strict convexity of $X^*$ gives us $f_1 = f_2$ and thus uniqueness.
+  \end{proof}
+  
+  \begin{proof}[Proof of (a)]
+    Since a closed linear subspace of Hilbert space is also Hilbert, we have $G \subset H$ also uniformly convex.
+    Also, for Hilbert, strict convexity follows from uniform convexity.
+    So (a) is given by the proof of Theorem~\ref{thr:taylor} by letting $X = H$.
+  \end{proof}
+\end{solution}
+\begin{problem}[5][15]
+  Let $X$ be a normed linear space satisfying the property: $\forall\set{x_n},\set{y_n} \subset X$, we have \[
+  \norm{x_n} = \norm{y_n} = 1, \; \norm{x_n + y_n} \to 2 \implies \norm{x_n -y_n} \to 0.
+  \]
+  If $\set{z_n} \subset X$ converges to $z \in X$ weakly, and $\norm{z_n} \to \norm{z}$, then $\norm{z_n - z} \to 0$.
+\end{problem}
+\begin{solution}
+  \begin{proof}
+    Recalling our definition of uniform convexity given in the proof to Theorem~\ref{thr:2}, we can see that the property given is sufficient to imply uniform convexity.
+    Thus, assuming $\set{z_n} \to z$ weakly, $\norm{z_n} \to \norm{z}$, and $X$ is uniformly convex, we prove $\norm{z_n - z} \to 0$.
+
+    Suppose $z \not= 0$.
+    Then, we define $u_j = \frac{z_j}{\norm{z_j}}$ and $u = \frac{z}{\norm{z}}$, and we have $u_j \leftharpoonup u$.
+    Also, $\frac{u_j + u_k}{2} \leftharpoonup u$ as $j,k \to \infty$.
+    Furthermore, we have \[
+    1 = \norm{u} \leq \liminf_{j,k}\norm{\frac{u_j+u_k}{2}} \leq \limsup_{j,k}\norm{\frac{u_j + u_k}{2}} \leq 1.
+    \]
+    Thus, $\norm{\frac{u_j+u_k}{2}} \to 1$ and, by the uniform convexity of $X$, we have $\norm{u_j - u_k} \to 0$.
+    Then, $u_j$ is Cauchy and $\norm{u_j - u} \to 0$.
+    Therefore, we have \[
+    \norm{z_j - z} = \norm{\norm{z_j}u_j - \norm{z}u} \leq \norm{z_j}\norm{u_j - u} + \norm{\norm{z_j} - \norm{z}}\norm{u} \to 0.
+    \]
+
+  \end{proof}
+\end{solution}
+\begin{problem}[6][30]
+  Let $H$ be an infinite-dimensional Hilbert space with an orthonormal basis $\set{e_n}$ and let $T \in B(H)$.
+  If the condition $\Sum{\norm{Te_n}^2}{n,1,\infty} < \infty$ holds then $T$ is a Hilbert-Schmidt operator.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item The definition of a Hilbert-Schmidt operator is independent of the choice of the orthonormal basis of $H$.
+  \item $T$ is Hilbert-Schmidt iff $T^*$ is Hilbert-Schmidt.
+  \item If $T$ is Hilbert-Schmidt then it is compact.
+  \item The set of Hilbert-Schmidt operators is a linear subspace of $B(H)$.
+  \item Give an example of a compact operator which is not Hilbert-Schmidt.
+  \end{enumerate}
+
+\end{problem}
+\end{document}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
