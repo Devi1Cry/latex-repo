@@ -75,7 +75,15 @@
     Suppose $QP = P$.
     Then, $Q = Q + P - QP$, so we can compute $Q^* = (Q + P - QP)^* = Q^* + P^* - P^*Q^*$, since adjoint is linear.
     Thus we have $Q^* + P^* - P^*Q^* = Q + P - PQ$, so we necessarily have $QP = PQ = P$.
-    The equivalence can be show by swapping $PQ$ above.
+    The equivalence can be shown by swapping $PQ$ above.
+    
+    If we assume (b), we have $QP = P \Leftrightarrow (I - Q)P = 0$.
+    Also, $\Ker(I-P) = \Image(P)$.
+    Somehow, we have (b)$\implies$(a)
+
+    Now, assume (e).
+    Then, $(Px,x) \leq (Qx,x)$ which is equivalent to $\norm{Px}^2 \leq \norm{Qx}^2$.
+    Therefore, (e)$\implies$(d).
   \end{proof}
 \end{solution}
 \begin{problem}[3][15]
@@ -87,6 +95,9 @@
 
 \end{problem}
 
+\begin{solution}
+  
+\end{solution}
 \begin{problem}[4][15]
   Let $H$ be a Hilbert space and $G \subset H$ a closed linear subspace.
   \begin{enumerate}[label=(\alph*)]
@@ -174,6 +185,44 @@
   \end{enumerate}
 
 \end{problem}
+
+\begin{solution}
+  \begin{proof}[Proof of (a)]
+    First, let $\set{e_n}$ and $\set{f_n}$ be two orthonormal bases for $H$.
+    Then, by Parseval's identity, we have $\norm{Te_n}^2 = \Sum{\Abs{(Te_n,f_n)}^2}{n,1,\infty}$.
+    Also, we have $\norm{T^*f_n}^2 = \Sum{\Abs{(e_n,T^*f_n)}^2}{n,1,\infty}$
+    Thus, we have $\Sum{\norm{Te_n}^2}{n} = \Sum{\norm{T^*f_n}}{n} = \Sum{\Sum{\Abs{(Te_n,f_n)}^2}{n}}{n}$.
+    From this we can see that the sum $\Sum{\norm{Te_n}}{n,1,\infty}$ is independent of the choice of $\set{e_n}$.
+  \end{proof}
+  \begin{proof}[Proof of (b)]
+    Since the definition is independent of basis and in the previous section we showed  $\Sum{\norm{Te_n}^2}{n} = \Sum{\norm{T^*f_n}}{n}$, then we have both directions.
+  \end{proof}
+  \begin{proof}[Proof of (c)]
+    An operator is compact iff it is the limit of a sequence of finite-rank operators.
+    Fix an $\set{e_k}$ for which $T$ is Hilbert-Schmidt.
+    For each integer $n \geq 1$, define $T_n \in B(H)$ by \[
+    T_n(x) \coloneqq \Sum{(x,e_k)Te_k}{k,1,n} \in \Span\set{Te_1,\dotsc,Te_n}
+    \]
+    Thus, $T_n$ is finite-rank.
+    Now, we have \[
+    \norm{Tx - T_nx} \leq \Sum{\Abs{(x,e_k)}\norm{Te_k}}{k,n+1,\infty} \leq \pa{\Sum{\Abs{(x,e_k)}^2}{k,n+1,\infty}}^{1/2} \pa{\Sum{\norm{Te_k}^2}{k,n+1,\infty}}^{1/2}
+    \]
+    If we fix $x$ such that $\norm{x} \leq 1$, then $\Sum{\Abs{(x,e_k)}^2}{k,n+1,\infty} \leq \Sum{\Abs{(x,e_k)}^2}{k,1,\infty} = \norm{x}^2 \leq 1$, so \[
+    \norm{Tx - T_nx} \leq \pa{\Sum{\norm{Te_k}^2}{k,n+1,\infty}}^{1/2} \to 0
+    \]
+    as $n \to \infty$.
+    Therefore, $T$ is compact.
+  \end{proof}
+  \begin{proof}[Proof of (d)]
+    For some scalar $c$, we have $\norm{cT}=\Abs{c}\norm{T}$ and thus $\Sum{\norm{cTe_n}^}{n,1,\infty} < \infty$, so $cT$ is still Hilbert-Schmidt.
+    Furthermore, for $T$ and $V$ both Hilbert-Schmidt, we have $norm{T+V} \leq \norm{T} + \norm{V}$, so $\Sum{\norm{(T+V)e_n}}{n,1,\infty} \leq \Sum{\norm{Te_n}}{n,1,\infty} + \Sum{\norm{Ve_n}}{n,1,\infty} < \infty$.
+    Therefore, $T + V$ is still Hilbert-Schmidt, so the set of Hilbert-Schmidt operators is a linear subspace.
+  \end{proof}
+  \begin{proof}[Example of (e)]
+    Consider the identity operator on $H$ given by $T: x \mapsto x$ for all $x \in H$.
+    Then we have, $\norm{Tx} = \norm{x}$, so $\Sum{\norm{Te_n}}{n,1,\infty} = \Sum{1}{n,1,\infty} \not< \infty$.
+  \end{proof}
+\end{solution}
 \end{document}
 %%% Local Variables: 
 %%% mode: latex
