@@ -20,16 +20,16 @@
     Let $\set{x^n}$ be a Cauchy sequence in $R^\infty$, where $x^n = (x_1^n, x_2^n, \dotsc)$.
     Our goal is to find an $x = (x_1, x_2, \dotsc) \in R^\infty$ such that $x^n \to x$.
     Let $\eps > 0$.
-    Because each $x^n$ is Cauchy, we have $\exists N > 0$ such that $d(x^n,x^m) < \eps, \forall n,m > N$.
+    Because $\set{x^n}$ is Cauchy, we have $\exists N > 0$ such that $d(x^n,x^m) < \eps, \forall n,m > N$.
     Therefore, for all $i$ and all $n,m > N$, we have $\Abs{x^n_i - x^m_i} < \eps$.
     Furthermore, this means, for each $i$ we have $(x^1_i, x^2_i, \dotsc)$ a Cauchy sequence in $\R$.
     Since $\R$ is complete, we have a limit $x_i$: $x_i = \lim_{n\to\infty}x^n_i$.
     
     Now, choose $\eps > 0$ and replace $\eps$ above with $\frac{\eps}{2}$.
-    Again, we can find an $N > 0$ such that $\Abs{x_i^n - x_i^m} < \frac{\eps}{2}$, for all $k$ and $n,m > N$.
-    Now take the limit as $m \to \infty$, we have $\Abs{x_i^n - x_i} < \frac{\eps}{2}$.
-    If we take supremum, we have $\sup_{k=1}^\infty\Abs{x_i^n - x_i} \leq \frac{\eps}{2}$.
-    This implies $d(x^n - x) \leq \frac{\eps}{2} < \eps$ and thus $x^n$ converges to $x$.
+    Again, we can find an $N > 0$ such that $\Abs{x_k^n - x_k^m} < \frac{\eps}{2}$, for all $k$ and $n,m > N$.
+    Now take the limit as $m \to \infty$, we have $\Abs{x_k^n - x_k} < \frac{\eps}{2}$.
+    If we take supremum, we have $\sup_{k=1}^\infty\Abs{x_k^n - x_k} \leq \frac{\eps}{2}$.
+    This implies $d(x^n, x) \leq \frac{\eps}{2} < \eps$ and thus $x^n$ converges to $x$.
     
   \end{proof}
 \end{solution}
