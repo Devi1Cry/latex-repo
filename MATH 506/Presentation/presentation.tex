@@ -33,6 +33,27 @@
     
   \end{proof}
 \end{solution}
+
+\begin{problem}
+  If $P_n \rightharpoonup P$ in $(M, \mathcal{B}_M)$ and $P_n(M_0) = P(M_0) = 1$, then $(P_n)^r \rightharpoonup P^r$ in $(M_0, \mathcal{B}_{M_0})$.
+\end{problem}
+
+\begin{solution}
+  \begin{lem}
+    \label{lem:1}
+    For any open set $G \subseteq M$, $\liminf_{n\to\\infty}P_n(G) \geq P(G)$.
+  \end{lem}
+  \begin{proof}
+    Let $G$ be an open set and let $H = G^c$.
+    Consider a sequence of functions $f_m(s) = \min(1,m\cdot d(s,F))$.
+    Then, each $f_m$ is a bounded continuous function, $0 \leq f_m \leq 1$ and $f_m \to 1$.
+    From the weak convergence of $P_n$, we have \[
+    \Int{f_m}{P} = \liminf_m \Int{f_m}{P_n} \leq \liminf_n P_n(G).
+    \]
+    Letting, $m\to\infty$, we get $\liminf_n P_n(G) \geq P(G)$.
+  \end{proof}
+  Also note, by taking the complement of everything above, we get $\limsup P_n(H) \leq P(H)$ for closed set $H$.
+\end{solution}
 \end{document}
 %%% Local Variables: 
 %%% mode: latex
