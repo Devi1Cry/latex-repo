@@ -2,6 +2,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{commons}
+\usepackage{accents}
 
 % info for header block in upper right hand corner
 \name{Zachary Seymour}
@@ -45,14 +46,37 @@
   \end{lem}
   \begin{proof}
     Let $G$ be an open set and let $H = G^c$.
-    Consider a sequence of functions $f_m(s) = \min(1,m\cdot d(s,F))$.
+    Consider a sequence of functions $f_m(s) = \min(1,m\cdot d(s,G))$.
     Then, each $f_m$ is a bounded continuous function, $0 \leq f_m \leq 1$ and $f_m \to 1$.
     From the weak convergence of $P_n$, we have \[
     \Int{f_m}{P} = \liminf_m \Int{f_m}{P_n} \leq \liminf_n P_n(G).
     \]
     Letting, $m\to\infty$, we get $\liminf_n P_n(G) \geq P(G)$.
   \end{proof}
-  Also note, by taking the complement of everything above, we get $\limsup P_n(H) \leq P(H)$ for closed set $H$.
+  
+  By Remark 4.2, we have $P(G) = P^r(G \cup M_0)$, and we will define $G_0 \coloneqq G \cup M_0$, the general open set in $M_0$.
+  Since we also have $P_n(M_0) = 1$, we can also write $P_n(G)$ as $(P_n)^r(G_0)$.
+  Therefore, we have \[
+  \liminf_n (P_n)^r(G_0) \geq P^r(G_0).
+  \]
+  As shown before, if we take the complement above, we also get \[
+  \limsup_n (P_n)^r(G_0) \geq P^r(G_0).
+  \]
+  
+  Now, let us take an $A \in \mathcal{B}_{M_0}$ such that $P^r(\partial A) = 0$.
+  Also, let $G = \accentset{\circ}{A}, K = \cl{A}$, so we have $G \subseteq A \subseteq K$ and $\partial A = K \setminus G$.
+  For every $n$, then, we have $P_n^r(G) \leq P_n^r(A) \leq P_n^r(K)$ so that \[
+  \liminf_n P_n^r(G) \leq \liminf_n P_n^r(A) \leq \limsup_n P_n^r(A) \leq \limsup_n P_n^r(K).
+  \]
+  From our previous result, we can deduce that $P^r(G) \leq \liminf_n P_n^r(A) \leq \limsup_n P_n^r(A) \leq P^r(K)$.
+  Therefore, since $P^r(K\setminus G) = 0$, we have $P^r(G) = P^r(A) = P^r(K)$, and thus \[
+  \lim_n P_n^r(A) = P^r(A).
+  \]
+  
+  Finally, since we have $\lim_n P_n^r(A) = P^r(A)$ for all $A \in \mathcal{B}_{M_0}$ such that $P^r(\partial A) = 0$, we can conclude that for each $f \in C_b(M_0)$, \[
+  \Int{f}{P_n^r,M_0} \to \Int{f}{P^r,M}
+  \]
+  which is the definition of weak convergence.
 \end{solution}
 \end{document}
 %%% Local Variables: 
